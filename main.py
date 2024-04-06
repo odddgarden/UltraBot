@@ -3,6 +3,7 @@ import os # default module
 from discord.ext import commands
 import json
 import logging
+import cowsay
 from discord import Option
 from discord import User
 from discord import Interaction
@@ -18,6 +19,7 @@ bot = commands.Bot(command_prefix=';', intents=intents)
 
 #loading cogs
 bot.load_extension('cogs.moderation')
+bot.load_extension('cogs.fun')
 
 
 @bot.event
