@@ -3,10 +3,22 @@ import os # default module
 from discord.ext import commands
 import json
 import logging
+from discord import Option
+from discord import User
+from discord import Interaction
+from discord import InteractionResponse
+from discord import MessageInteraction
+from discord import interactions
+from discord import InteractionMessage
+
 
 # Defing bot and bot user intents
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=';', intents=intents)
+
+#loading cogs
+bot.load_extension('cogs.moderation')
+
 
 @bot.event
 async def on_ready():
@@ -38,21 +50,22 @@ class InviteView(discord.ui.View):
 
 @bot.slash_command(name="ping", description="Sends the bot's ping or latency")
 async def ping(ctx):
-    await ctx.respond(f"Pong! Latency or ping is {bot.latency}")
+    await ctx.send(f"Pong! Latency or ping is {bot.latency}")
 
 @bot.slash_command(name="helloworld", description="If your program can't say this, don't talk to me")
 async def helloworld(ctx):
-    await ctx.respond("Hello world!")
+    await ctx.send("Hello world!")
+
 
 @bot.slash_command(name="about", description="About the bot")
 async def about(ctx):
     embed = discord.Embed(
         title= "About UltraBot.py",
-        description= "UltraBot.py is a Python based discord bot created by CombineSoldier14 with commands for moderation and fun!",
+        description= "UltraBot.py is a Python based discord bot created by CombineSoldier14 with commands for moderation and fun!\n **UltraBot.py's birthday is 4/5/2024.**",
         color=discord.Colour.yellow(),
     )
     embed.set_thumbnail(url="https://camo.githubusercontent.com/7ebe7e305bde0efefd93829ed13a016cbfcad30985449dd5d54f612174aceb44/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6170702d69636f6e732f313232353232303736343836313733303836372f66363662643462656234663165626565303638356438633563666436343662622e706e673f73697a653d323536")
-    await ctx.respond(embed=embed, view=AboutLinkBloggerView())
+    await ctx.send(embed=embed, view=AboutLinkBloggerView())
 
 
 # say is intentionally not a slash command.
@@ -61,15 +74,19 @@ async def _say(ctx, *, args):
     await ctx.send(args)
     await ctx.message.delete()
 
+@bot.slash_command(name="ephemeral", description="Sends an ephemeral message to yourself!")
+async def ephemeral(ctx, text):
+    await ctx.respond(text, ephemeral="true")
+    
 @bot.slash_command(name="spoiler", description="Marks your text as a spoiler!")
 async def _spoiler(ctx, text):
     
     await ctx.send("||" + text + "||")
-    await ctx.message.delete()
+    
 
 @bot.slash_command(name="invite", description="Get the invite link for UltraBot.py!")
 async def invite(ctx):
-   await ctx.respond(view=InviteView())
+   await ctx.send(view=InviteView())
 
 # AutoRun prevention with __name__
 if __name__ == "__main__": # import run prevention
