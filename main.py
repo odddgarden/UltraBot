@@ -19,7 +19,7 @@ async def on_ready():
 async def ping(ctx):
     await ctx.respond(f"Pong! Latency or ping is {bot.latency}")
 
-@bot.command(name="helloworld", description="If your program can't say this, don't talk to me")
+@bot.slash_command(name="helloworld", description="If your program can't say this, don't talk to me")
 async def helloworld(ctx):
     await ctx.respond("Hello world!")
 
@@ -30,6 +30,12 @@ async def helloworld(ctx):
 async def _say(ctx, text):
     
     await ctx.send(text)
+    await ctx.message.delete()
+
+@bot.slash_command(name="spoiler", description="Marks your text as a spoiler!")
+async def _spoiler(ctx, text):
+    
+    await ctx.send("||" + text + "||")
     await ctx.message.delete()
 
 # AutoRun prevention with __name__
