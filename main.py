@@ -2,10 +2,10 @@ import discord
 import os # default module
 from discord.ext import commands
 
-
-bot = commands.Bot(command_prefix=';')
 intents = discord.Intents.all()
-FRENCH = 420052952686919690
+bot = commands.Bot(command_prefix=';', intents=intents)
+
+
 
 #This file main.py can be seen as a cog itself. Only basic commands are here!
 
@@ -24,8 +24,7 @@ async def helloworld(ctx):
 #Don't worry, the french people joke is an inside joke with my friend
 @bot.command(name="say")
 async def _say(ctx, text):
-    if ctx.author.id == FRENCH:
-        await ctx.send("**I don't take orders from French people!** :middle_finger:")
+    
     await ctx.send(text)
     await ctx.message.delete()
 
