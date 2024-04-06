@@ -25,11 +25,9 @@ async def helloworld(ctx):
 
 
 # say is intentionally not a slash command.
-#Don't worry, the french people joke is an inside joke with my friend
 @bot.command(name="say")
-async def _say(ctx, text):
-    
-    await ctx.send(text)
+async def _say(ctx, *, args):
+    await ctx.send(args)
     await ctx.message.delete()
 
 @bot.slash_command(name="spoiler", description="Marks your text as a spoiler!")
