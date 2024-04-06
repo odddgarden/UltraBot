@@ -17,6 +17,7 @@ from discord import InteractionMessage
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=';', intents=intents)
 
+logging.basicConfig(level=logging.DEBUG)
 #loading cogs
 bot.load_extension('cogs.moderation')
 bot.load_extension('cogs.fun')
@@ -105,8 +106,6 @@ if __name__ == "__main__": # import run prevention
 
     if (loadedJSONToken == None) and (environToken == None):
         raise EnvironmentError("No token specified!  Please enter a token via token.json or by passing an environment variable called 'BOT_TOKEN'.  Stop.")
-    BOT_TOKEN = (environToken if environToken != None else loadedJSONToken)
-    
-    
-    bot.run(_d["BOT_TOKEN"])
+    BOT_TOKEN = (environToken if environToken != None else loadedJSONToken)    
+    bot.run(BOT_TOKEN)
 

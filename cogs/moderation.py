@@ -42,12 +42,12 @@ class Moderation(commands.Cog):
     @ban.error
     async def ban_error(self, ctx, error):
      if isinstance(error, commands.MissingPermissions):
-          await ctx.send("You don't have permission to ban members.")
+          await ctx.respond("You don't have permission to ban members.")
 
     @kick.error
     async def ban_error(self, ctx, error):
       if isinstance(error, commands.MissingPermissions):
-          await ctx.send("You don't have permission to kick members.")
+          await ctx.respond("You don't have permission to kick members.")
 
 def setup(bot): # this is called by Pycord to setup the cog
     bot.add_cog(Moderation(bot)) # add the cog to the bot
