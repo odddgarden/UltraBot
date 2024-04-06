@@ -93,7 +93,20 @@ async def invite(ctx):
 
 # AutoRun prevention with __name__
 if __name__ == "__main__": # import run prevention
-    with open("token.json", "r") as f:
-      _d = json.load(f)
+    if os.path.isfile("token.json") == True: # check if token.json exists
+        with open("token.json", "r") as f:
+            _d = json.load(f)
+            loadedJSONToken = _d["BOT_TOKEN"]
+        if loadedJSONToken.lower() == "yourtokenhere":
+            loadedJSONToken = None
+    else:
+        loadedJSONToken = None
+    environToken = os.getenv("BOT_TOKEN")
+
+    if (loadedJSONToken == None) and (environToken == None):
+        raise EnvironmentError("No token specified!  Please enter a token via token.json or by passing an environment variable called 'BOT_TOKEN'.  Stop.")
+    BOT_TOKEN = (environToken if environToken != None else loadedJSONToken)
+    
+    
     bot.run(_d["BOT_TOKEN"])
 
