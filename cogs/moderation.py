@@ -1,10 +1,6 @@
 import discord
 from discord.ext import commands
 import os
-from discord import default_permissions
-from discord import permissions
-from discord import Permissions
-from discord import PermissionOverwrite
 
 class Moderation(commands.Cog):
     def __init__(self, bot):
@@ -45,13 +41,13 @@ class Moderation(commands.Cog):
 
     @ban.error
     async def ban_error(self, ctx, error):
-     if isinstance(error, MissingPermissions):
-          await ctx.send("You don't have permission to ban members.")
+     if isinstance(error, commands.MissingPermissions):
+          await ctx.respond("You don't have permission to ban members.")
 
     @kick.error
     async def ban_error(self, ctx, error):
-      if isinstance(error, MissingPermissions):
-          await ctx.send("You don't have permission to kick members.")
+      if isinstance(error, commands.MissingPermissions):
+          await ctx.respond("You don't have permission to kick members.")
 
 def setup(bot): # this is called by Pycord to setup the cog
     bot.add_cog(Moderation(bot)) # add the cog to the bot
