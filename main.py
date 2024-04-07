@@ -30,7 +30,21 @@ async def on_ready():
     bot.auto_sync_commands = True
     logging.info("Bot is ready!")
 
+@bot.event
+async def on_application_command_error(interaction: discord.Interaction,
+                                        error: discord.DiscordException):
+    embed = discord.Embed(
+        title = "Whoops!",
+        description = "An error has occured.  Retrying the command might help, or this can be an internal server error",
+        color = discord.Colour.red()
+    )
+    embed.add_field(name="Error Message", value="`{0}`".format(repr(error)))
 
+    embed.set_thumbnail(url="https://static.alphagame.dev/alphagamebot/img/error.png")
+    try:
+        await interaction.response.send_message(embed=embed)
+    except:
+        await interaction.followup.send(embed=embed)
 #UltraBot website button for /about
 class AboutLinkBloggerView(discord.ui.View):
     def __init__(self):
