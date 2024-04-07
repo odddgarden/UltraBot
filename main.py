@@ -73,11 +73,11 @@ class InviteView(discord.ui.View):
 
 @bot.slash_command(name="ping", description="Sends the bot's ping or latency")
 async def ping(ctx):
-    await ctx.send(f"Pong! Latency or ping is {bot.latency}")
+    await ctx.respond(f"Pong! Latency or ping is {bot.latency}")
 
 @bot.slash_command(name="helloworld", description="If your program can't say this, don't talk to me")
 async def helloworld(ctx):
-    await ctx.send("Hello world!")
+    await ctx.respond("Hello world!")
 
 
 @bot.slash_command(name="about", description="About the bot")
@@ -89,7 +89,7 @@ async def about(ctx):
     )
     embed.set_thumbnail(url="https://camo.githubusercontent.com/7ebe7e305bde0efefd93829ed13a016cbfcad30985449dd5d54f612174aceb44/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6170702d69636f6e732f313232353232303736343836313733303836372f66363662643462656234663165626565303638356438633563666436343662622e706e673f73697a653d323536")
     embed.add_field(name="**Latest Addition**", value="Added /poll!")
-    await ctx.send(embed=embed, view=AboutLinkBloggerView())
+    await ctx.respond(embed=embed, view=AboutLinkBloggerView())
 
 
 # say is intentionally not a slash command.
@@ -105,12 +105,12 @@ async def ephemeral(ctx, text):
 @bot.slash_command(name="spoiler", description="Marks your text as a spoiler!")
 async def _spoiler(ctx, text):
     
-    await ctx.send("||" + text + "||")
+    await ctx.respond("||" + text + "||")
     
 
 @bot.slash_command(name="invite", description="Get the invite link for UltraBot.py!")
 async def invite(ctx):
-   await ctx.send(view=InviteView())
+   await ctx.respond(view=InviteView())
 
 # AutoRun prevention with __name__
 if __name__ == "__main__": # import run prevention
