@@ -15,7 +15,8 @@ class Moderation(commands.Cog):
 
     @commands.slash_command(name="ban", description="Bans a user.")
     @commands.has_permissions(ban_members = True)
-    async def ban(self, ctx, user: discord.Option(discord.Member, description="User to ban", required="true"), reason: discord.Option(str, description="Reason for ban", required="true")):
+    async def ban(self, ctx, user: discord.Option(discord.Member, description="User to ban", required=True), 
+                  reason: discord.Option(str, description="Reason for ban", required=True)):
       await user.ban(reason = reason)
       embed = discord.Embed(
        title="Ban",
@@ -28,7 +29,8 @@ class Moderation(commands.Cog):
     
     @commands.slash_command(name="kick", description="Kicks a user.")
     @commands.has_permissions(kick_members = True)
-    async def kick(self, ctx, user: discord.Option(discord.Member, description="User to kick", required="true"), reason: discord.Option(str, description="Reason for ban", required="true")):
+    async def kick(self, ctx, user: discord.Option(discord.Member, description="User to kick", required=True), 
+                  reason: discord.Option(str, description="Reason for ban", required=True)):
       await user.kick(reason = reason)
       embed = discord.Embed(
        title="Kick",
