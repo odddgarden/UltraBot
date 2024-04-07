@@ -6,6 +6,6 @@
 UltraBot.py is a full open source discord bot made by me. I made it to learn Python and make a discord bot because again, robots are cool.
 
 ## Credits
-**Credit to [AlphaGameDeveloper](https://github.com/AlphaGameDeveloper) for helping me out with some of the code.**
+**Credit to [AlphaGameDeveloper](https://github.com/AlphaGameDeveloper) for helping me out with some of the code.  His bot can be found [here](https://github.com/AlphaGameDeveloper/AlphaGameBot).**
 
 [UltraBot FAQ](https://combinesoldier14.blogspot.com/p/ultrabot-links-faq.html)
