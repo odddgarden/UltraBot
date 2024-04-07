@@ -11,6 +11,10 @@ from discord import InteractionResponse
 from discord import MessageInteraction
 from discord import interactions
 from discord import InteractionMessage
+import nltk
+import random
+nltk.download('words')
+
 
 
 # Defing bot and bot user intents
@@ -21,6 +25,7 @@ logging.basicConfig(level=logging.DEBUG)
 #loading cogs
 bot.load_extension('cogs.moderation')
 bot.load_extension('cogs.fun')
+bot.load_extension('cogs.apis')
 
 
 @bot.event
@@ -40,7 +45,7 @@ async def on_application_command_error(interaction: discord.Interaction,
     )
     embed.add_field(name="Error Message", value="`{0}`".format(repr(error)))
 
-    embed.set_thumbnail(url="https://static.alphagame.dev/alphagamebot/img/error.png")
+    embed.set_thumbnail(url="https://i.imgur.com/KR3aiwB.png")
     try:
         await interaction.response.send_message(embed=embed)
     except:
@@ -122,4 +127,3 @@ if __name__ == "__main__": # import run prevention
         raise EnvironmentError("No token specified!  Please enter a token via token.json or by passing an environment variable called 'BOT_TOKEN'.  Stop.")
     BOT_TOKEN = (environToken if environToken != None else loadedJSONToken)    
     bot.run(BOT_TOKEN)
-
