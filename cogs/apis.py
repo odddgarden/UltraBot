@@ -1,0 +1,54 @@
+import discord
+from discord.ext import commands
+import os
+from discord import default_permissions
+from discord import permissions
+from discord import Permissions
+from discord import PermissionOverwrite
+import requests
+import json
+import random
+from random import uniform
+
+
+r = requests.get("https://official-joke-api.appspot.com/random_joke")
+j = json.loads(r.text)
+
+class Apis(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        self._last_member = None
+    @commands.slash_command(name="dadjoke", description="Get a random dad joke!")
+    async def dadjoke(self, ctx):
+        await ctx.respond("{0} {1}".format(j["setup"], j["punchline"]))
+    
+    @commands.slash_command(name="xkcd", description="Get a random XKCD comic!")
+    async def xkcd(self, ctx):
+        xkcdlink = requests.get("https://xkcd.com/" + str(random.randint(1, 2916)) + "/info.0.json")
+        xkcdjson = json.loads(xkcdlink.text)
+            
+        embed = discord.Embed(
+            
+            
+            title="#" + str(xkcdjson["num"]) + " - " + xkcdjson["title"],
+            description=xkcdjson["alt"],
+            color=discord.Colour.blurple(),
+            
+            
+        )
+        embed.set_image(url=xkcdjson["img"])
+        embed.set_footer(text="Year: " + str(xkcdjson["year"]) + ", Month " + str(xkcdjson["month"]) + ", Day " + str(xkcdjson["day"]))
+        await ctx.respond(embed=embed)
+        
+
+        
+
+
+
+
+
+
+
+
+def setup(bot): # this is called by Pycord to setup the cog
+    bot.add_cog(Apis(bot)) # add the cog to the bot
