@@ -6,6 +6,11 @@ from discord import permissions
 from discord import Permissions
 from discord import PermissionOverwrite
 import cowsay
+import nltk
+import random
+nltk.download('words')
+
+
 
 class Fun(commands.Cog):
     def __init__(self, bot):
@@ -17,6 +22,10 @@ class Fun(commands.Cog):
                      character=discord.Option(str, description="Character for cowsay to use."), 
                      choices=cowsay.char_names, default="cow"):
         await ctx.respond("```\n{0}\n```".format(cowsay.get_output_string(character, text))),
+    
+    @commands.slash_command(name="randomword", description="Gives you a random English word!")
+    async def randomword(self, ctx):
+        await ctx.respond("Your Random Word: `" + random.choice(nltk.corpus.words.words()) + "`")
 
 def setup(bot): # this is called by Pycord to setup the cog
     bot.add_cog(Fun(bot)) # add the cog to the bot
