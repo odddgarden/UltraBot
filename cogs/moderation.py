@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 import os
+from discord import reaction
+from discord import Reaction
 
 class Moderation(commands.Cog):
     def __init__(self, bot):
@@ -41,6 +43,24 @@ class Moderation(commands.Cog):
 
       await ctx.respond(embed=embed)
 
+    @commands.slash_command(name="poll", description="Creates a votable yes or no poll!")
+    @commands.has_permissions(administrator = True)
+    async def poll(self, ctx, title: discord.Option(str, description="Title of poll", required=True), description: discord.Option(str, description="Your yes or no poll description", required=True)):
+       embed = discord.Embed(
+          title=title,
+          description=description,
+          color=discord.Colour.blurple(),
+
+       )
+       embed.set_footer(text="UltraBot.py poll system")
+
+       
+       emoji = '\N{THUMBS UP SIGN}'
+       emoji2 = '\N{THUMBS DOWN SIGN}'
+       message = await ctx.send(embed=embed)
+       await message.add_reaction(emoji)
+       await message.add_reaction(emoji2)
+
     @ban.error
     async def ban_error(self, ctx, error):
      if isinstance(error, commands.MissingPermissions):
@@ -52,4 +72,4 @@ class Moderation(commands.Cog):
           await ctx.respond("You don't have permission to kick members.")
 
 def setup(bot): # this is called by Pycord to setup the cog
-    bot.add_cog(Moderation(bot)) # add the cog to the bot
+    bot.add_cog(Moderation(bot)) # add the cog to the b
