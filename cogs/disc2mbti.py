@@ -24,9 +24,7 @@ class Disc2mbti(commands.Cog):
         self._CONSTRUCT = "{0} *({1}, {2}, {3}, and {4})*"
 
     @commands.slash_command(title="disc2mbti", description="Converts your Indigo DISC scores into MBTI personality types!")
-    async def disc2mbti(self, ctx, d: discord.Option(int, description="Your Dominance Score"), i: discord.Option(int, description="Your Influence Score"), s: discord.Option(int, description="Your Steadiness Score"), c: discord.Option(int, description="Your Compliance Score")):
-        await ctx.respond("Your MBTI is:")
-        
+    async def disc2mbti(self, ctx, d: discord.Option(int, description="Your Dominance Score"), i: discord.Option(int, description="Your Influence Score"), s: discord.Option(int, description="Your Steadiness Score"), c: discord.Option(int, description="Your Compliance Score")):        
         currentMbti = [None, None, None, None] # initalize empti mbti
         if i >= 50:
             currentMbti[0] = "E"
