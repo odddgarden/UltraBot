@@ -60,6 +60,14 @@ class Moderation(commands.Cog):
        message = await ctx.send(embed=embed)
        await message.add_reaction(emoji)
        await message.add_reaction(emoji2)
+    
+    @commands.slash_command(name="purge", description="Purges a certain number of messages from a channel")
+    @commands.has_permissions(manage_messages = True)
+    @commands.has_permissions(read_message_history = True)
+    async def purge(self, ctx, number: discord.Option(int, description="Number of messages to purge. Max is 100", required=True)):
+       await ctx.channel.purge(limit=number)
+       await ctx.respond("**" + str(number) + "** messages have been purged!")
+       
 
     @ban.error
     async def ban_error(self, ctx, error):
