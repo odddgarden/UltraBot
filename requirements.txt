@@ -1,3 +1,4 @@
 py-cord
 cowsay
 nltk
+requests
