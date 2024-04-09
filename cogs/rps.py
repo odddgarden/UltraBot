@@ -10,38 +10,39 @@ class Rps(commands.Cog):
         self._last_member = None
     @commands.slash_command(title="rps", description="Play Rock Paper Scissors with UltraBot!")
     async def rps(self, ctx, choice: discord.Option(str, description="Your choice! Choose either rock, paper, or scissors.")):
-        user_choice = choice.lower
+        user_choice = choice.lower()
         bot_choice = random.choice(WORDS)
-        if bot_choice == "rock" and user_choice == "rock":
-            win_status = "It's a TIE!"
+        def win_status():
+         if bot_choice == "rock" and user_choice == "rock":
+            return "It's a TIE!"
         
-        elif bot_choice == "rock" and user_choice == "paper":
-            win_status = "You WON!"
+         if bot_choice == "rock" and user_choice == "paper":
+            return "You WON!"
 
-        elif bot_choice == "rock" and user_choice == "scissors":
-            win_status = "You LOST!"
+         if bot_choice == "rock" and user_choice == "scissors":
+            return "You LOST!"
 
-        elif bot_choice == "paper" and user_choice == "rock":
-            win_status = "You LOST!"
+         if bot_choice == "paper" and user_choice == "rock":
+            return "You LOST!"
 
-        elif bot_choice == "paper" and user_choice == "paper":
-            win_status = "It's a TIE!"
+         if bot_choice == "paper" and user_choice == "paper":
+            return "It's a TIE!"
 
-        elif bot_choice == "paper" and user_choice == "scissors":
-            win_status = "You WON!"
+         if bot_choice == "paper" and user_choice == "scissors":
+            return "You WON!"
 
-        elif bot_choice == "scissors" and user_choice == "rock":
-            win_status = "You WON!"
+         if bot_choice == "scissors" and user_choice == "rock":
+            return "You WON!"
 
-        elif bot_choice == "scissors" and user_choice == "paper":
-            win_status = "You LOST!"
+         if bot_choice == "scissors" and user_choice == "paper":
+            return "You LOST!"
 
-        elif bot_choice == "scissors" and user_choice == "scissors":
-            win_status = "It's a TIE!"
+         if bot_choice == "scissors" and user_choice == "scissors":
+            return "It's a TIE!"
 
         embed = discord.Embed(
-            title=win_status,
-            description="You chose " + user_choice + ", UltraBot chose " + bot_choice,
+            title=str(win_status()),
+            description="You chose " + str(user_choice) + ", UltraBot chose " + str(bot_choice),
             color=discord.Colour.red(),
         )
         embed.set_footer(text="UltraBot Rock Paper Scissors")
