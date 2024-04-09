@@ -15,29 +15,29 @@ class Rps(commands.Cog):
         if bot_choice == "rock" and user_choice == "rock":
             win_status = "It's a TIE!"
         
-        if bot_choice == "rock" and user_choice == "paper":
+        elif bot_choice == "rock" and user_choice == "paper":
             win_status = "You WON!"
 
-        if bot_choice == "rock" and user_choice == "scissors":
+        elif bot_choice == "rock" and user_choice == "scissors":
             win_status = "You LOST!"
 
-        if bot_choice == "paper" and user_choice == "rock":
+        elif bot_choice == "paper" and user_choice == "rock":
             win_status = "You LOST!"
 
-        if bot_choice == "paper" and user_choice == "paper":
+        elif bot_choice == "paper" and user_choice == "paper":
             win_status = "It's a TIE!"
 
-        if bot_choice == "paper" and user_choice == "scissors":
+        elif bot_choice == "paper" and user_choice == "scissors":
             win_status = "You WON!"
 
-        if bot_choice == "scissors" and user_choice == "rock":
+        elif bot_choice == "scissors" and user_choice == "rock":
             win_status = "You WON!"
 
-        if bot_choice == "scissors" and user_choice == "paper":
+        elif bot_choice == "scissors" and user_choice == "paper":
             win_status = "You LOST!"
 
-        if bot_choice == "scissors" and user_choice == "scissors":
-            win_status = "IT's a TIE!"
+        elif bot_choice == "scissors" and user_choice == "scissors":
+            win_status = "It's a TIE!"
 
         embed = discord.Embed(
             title=win_status,
