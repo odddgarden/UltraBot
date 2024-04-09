@@ -39,6 +39,18 @@ class Apis(commands.Cog):
         embed.set_image(url=xkcdjson["img"])
         embed.set_footer(text="Year: " + str(xkcdjson["year"]) + ", Month " + str(xkcdjson["month"]) + ", Day " + str(xkcdjson["day"]))
         await ctx.respond(embed=embed)
+    
+    @commands.slash_command(name="dogpics", description="Random picture of a dog!")
+    async def dogpics(self, ctx):
+        doglink = requests.get("https://dog.ceo/api/breeds/image/random")
+        dogjson = json.loads(doglink.text)
+
+        embed = discord.Embed(
+            title="Dog",
+            color=discord.Colour.blurple(),
+        )
+        embed.set_image(url=dogjson["message"])
+        await ctx.respond(embed=embed)
         
 
         
