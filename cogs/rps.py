@@ -13,8 +13,7 @@ class Rps(commands.Cog):
         user_choice = choice.lower()
         bot_choice = random.choice(WORDS)
         def win_status():
-         if bot_choice == "rock" and user_choice == "rock":
-            return "It's a TIE!"
+         
         
          if bot_choice == "rock" and user_choice == "paper":
             return "You WON!"
@@ -25,8 +24,7 @@ class Rps(commands.Cog):
          if bot_choice == "paper" and user_choice == "rock":
             return "You LOST!"
 
-         if bot_choice == "paper" and user_choice == "paper":
-            return "It's a TIE!"
+         
 
          if bot_choice == "paper" and user_choice == "scissors":
             return "You WON!"
@@ -37,7 +35,7 @@ class Rps(commands.Cog):
          if bot_choice == "scissors" and user_choice == "paper":
             return "You LOST!"
 
-         if bot_choice == "scissors" and user_choice == "scissors":
+         else:
             return "It's a TIE!"
 
         embed = discord.Embed(
