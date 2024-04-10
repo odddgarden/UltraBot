@@ -29,6 +29,7 @@ bot.load_extension('cogs.apis')
 bot.load_extension('cogs.disc2mbti')
 bot.load_extension('cogs.calculator')
 bot.load_extension('cogs.rps')
+bot.load_extension('cogs.utility')
 
 
 @bot.event
