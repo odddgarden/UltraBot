@@ -80,4 +80,4 @@ class Moderation(commands.Cog):
           await ctx.respond("You don't have permission to kick members.")
 
 def setup(bot): # this is called by Pycord to setup the cog
-    bot.add_cog(Moderation(bot)) # add the cog to the b
+    bot.add_cog(Moderation(bot)) # add the cog to the bot
