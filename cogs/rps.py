@@ -2,7 +2,12 @@ import discord
 from discord.ext import commands
 import os
 import random
+import json
 WORDS = ["rock", "paper", "scissors"]
+
+with open("version.json", "r") as f:
+            _r = json.load(f)
+            VERSION = _r["VERSION"]
 
 class Rps(commands.Cog):
     def __init__(self, bot):
@@ -43,7 +48,7 @@ class Rps(commands.Cog):
             description="You chose " + str(user_choice) + ", UltraBot chose " + str(bot_choice),
             color=discord.Colour.red(),
         )
-        embed.set_footer(text="UltraBot Rock Paper Scissors")
+        embed.set_author(name="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
 
         await ctx.respond(embed=embed)
 
