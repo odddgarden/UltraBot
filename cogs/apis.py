@@ -54,7 +54,7 @@ class Apis(commands.Cog):
             color=discord.Colour.blurple(),
         )
         embed.set_image(url=dogjson["message"])
-        embed.set_author(name="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+        embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
         await ctx.respond(embed=embed)
         
 
