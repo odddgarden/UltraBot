@@ -15,6 +15,10 @@ import nltk
 import random
 nltk.download('words')
 
+with open("version.json", "r") as f:
+            _r = json.load(f)
+            VERSION = _r["VERSION"]
+
 
 
 # Defing bot and bot user intents
@@ -31,6 +35,7 @@ bot.load_extension('cogs.calculator')
 bot.load_extension('cogs.rps')
 bot.load_extension('cogs.utility')
 bot.load_extension('cogs.role')
+bot.load_extension('cogs.mcstatus')
 
 
 @bot.event
@@ -88,7 +93,7 @@ async def helloworld(ctx):
 @bot.slash_command(name="about", description="About the bot")
 async def about(ctx):
     embed = discord.Embed(
-        title= "About UltraBot v1.1.0",
+        title= "About UltraBot v" + VERSION,
         description= "UltraBot is a Python based discord bot created by CombineSoldier14 with commands for moderation and fun!\n UltraBot's birthday is **4/5/2024.**",
         color=discord.Colour.yellow(),
     )
