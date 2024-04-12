@@ -8,12 +8,17 @@ from discord import PermissionOverwrite
 import cowsay
 import nltk
 import random
+import json
 nltk.download('words')
 
 word_list = ["Heads", "Tails"]
 eightball_list = ["It is certain.", "It is decidedly so", "Without a doubt", "Yes - definitely", "You may rely on it", "As I see it, yes.", "Most likely.", "Outlook good.", "Yes.", "Signs point to yes.", "Reply hazy, try again", "Ask again later", "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again.", "Don't count on it", "My reply is no.", "My sources say no.", "Outlook not so good.", "Very doubtful."]
 random_word = random.choice(word_list)
 random_8ball = random.choice(eightball_list)
+
+with open("version.json", "r") as f:
+            _r = json.load(f)
+            VERSION = _r["VERSION"]
 
 class Fun(commands.Cog):
     def __init__(self, bot):
@@ -43,7 +48,9 @@ class Fun(commands.Cog):
             
         )
         embed.set_thumbnail(url="https://icons.iconarchive.com/icons/barkerbaggies/pool-ball/256/Ball-8-icon.png")
+        embed.set_author(name="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
         await ctx.respond(embed=embed)
 
 def setup(bot): # this is called by Pycord to setup the cog
     bot.add_cog(Fun(bot)) # add the cog to the bot
+
