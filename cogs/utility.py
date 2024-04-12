@@ -12,6 +12,17 @@ class utility(commands.Cog):
       await ctx.respond(user.display_avatar)
 
 
+    @commands.slash_command(name="makeembed", description="Make your own embed!")
+    async def makeembed(self, ctx, title: discord.Option(str, description="Title of embed"), description: discord.Option(str, description="Description of embed"), footer: discord.Option(str, description="Footer of embed"), color: discord.Option(int, description="Color of embed in hex format")):
+        embed = discord.Embed(
+            title=title,
+            description=description,
+            color=color,
+        )
+        embed.set_footer(text=footer)
+        await ctx.respond(embed=embed)
+
+
 
 
 
