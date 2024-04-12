@@ -76,7 +76,7 @@ class InviteView(discord.ui.View):
    def __init__(self):
       super().__init__(timeout=None)
 
-      supportServerButton = discord.ui.Button(label="Invite UltraBot.py!", style=discord.ButtonStyle.gray, url="https://discord.com/oauth2/authorize?client_id=1225220764861730867")
+      supportServerButton = discord.ui.Button(label="Invite UltraBot!", style=discord.ButtonStyle.gray, url="https://discord.com/oauth2/authorize?client_id=1225220764861730867")
       self.add_item(supportServerButton)
 
 #This file main.py can be seen as a cog itself. Only basic commands are here!
@@ -118,7 +118,7 @@ async def _spoiler(ctx, text):
     await ctx.respond("||" + text + "||")
     
 
-@bot.slash_command(name="invite", description="Get the invite link for UltraBot.py!")
+@bot.slash_command(name="invite", description="Get the invite link for UltraBot!")
 async def invite(ctx):
    await ctx.respond(view=InviteView())
 
