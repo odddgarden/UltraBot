@@ -4,6 +4,7 @@ import os
 from discord import reaction
 from discord import Reaction
 import json
+import datetime
 
 with open("version.json", "r") as f:
             _r = json.load(f)
@@ -73,6 +74,24 @@ class Moderation(commands.Cog):
        await ctx.channel.purge(limit=number)
        await ctx.respond("**" + str(number) + "** messages have been purged!")
 
+
+    @commands.slash_command(name="timeout", description="Timeout a user.")
+    @commands.has_permissions(moderate_members=True)
+    async def timeout(self, ctx, time: discord.Option(int, description="Amount of time to timeout user", required=True), user: discord.Option(discord.Member, description="User to timeout", required=True)):
+        await user.timeout_for(datetime.timedelta(minutes=time))
+        await ctx.respond("{0} has been timed out for **{1}**.".format(user, time))
+
+
+
+    @commands.slash_command(name="untimeout", description="Removes a timeout from a user.")
+    @commands.has_permissions(moderate_members=True)
+    async def untimeout(self, ctx, user: discord.Option(discord.Member, description="User to untimeout", required=True)):
+        await user.remove_timeout()
+        await ctx.respond("{0} has had their timeout removed!".format(user))
+
+    
+
+
     
 
     
@@ -90,3 +109,5 @@ class Moderation(commands.Cog):
 
 def setup(bot): # this is called by Pycord to setup the cog
     bot.add_cog(Moderation(bot)) # add the cog to the bot
+
+
