@@ -77,7 +77,7 @@ class Moderation(commands.Cog):
 
     @commands.slash_command(name="timeout", description="Timeout a user.")
     @commands.has_permissions(moderate_members=True)
-    async def timeout(self, ctx, time: discord.Option(int, description="Amount of time to timeout user", required=True), user: discord.Option(discord.Member, description="User to timeout", required=True)):
+    async def timeout(self, ctx, time: discord.Option(int, description="Amount of minutes to time out user", required=True), user: discord.Option(discord.Member, description="User to timeout", required=True)):
         await user.timeout_for(datetime.timedelta(minutes=time))
         await ctx.respond("{0} has been timed out for **{1}**.".format(user, time))
 
