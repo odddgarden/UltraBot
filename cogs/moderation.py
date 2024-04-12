@@ -3,6 +3,11 @@ from discord.ext import commands
 import os
 from discord import reaction
 from discord import Reaction
+import json
+
+with open("version.json", "r") as f:
+            _r = json.load(f)
+            VERSION = _r["VERSION"]
 
 class Moderation(commands.Cog):
     def __init__(self, bot):
@@ -52,7 +57,7 @@ class Moderation(commands.Cog):
           color=discord.Colour.blurple(),
 
        )
-       embed.set_footer(text="UltraBot.py poll system")
+       embed.set_author(name="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
 
        
        emoji = '\N{THUMBS UP SIGN}'
@@ -67,6 +72,10 @@ class Moderation(commands.Cog):
     async def purge(self, ctx, number: discord.Option(int, description="Number of messages to purge. Max is 100", required=True)):
        await ctx.channel.purge(limit=number)
        await ctx.respond("**" + str(number) + "** messages have been purged!")
+
+    
+
+    
        
 
     @ban.error
@@ -75,7 +84,7 @@ class Moderation(commands.Cog):
           await ctx.respond("You don't have permission to ban members.")
 
     @kick.error
-    async def ban_error(self, ctx, error):
+    async def kick_error(self, ctx, error):
       if isinstance(error, commands.MissingPermissions):
           await ctx.respond("You don't have permission to kick members.")
 
