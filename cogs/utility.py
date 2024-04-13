@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import os
+import time
 
 class utility(commands.Cog):
     def __init__(self, bot):
@@ -21,6 +22,17 @@ class utility(commands.Cog):
         )
         embed.set_footer(text=footer)
         await ctx.respond(embed=embed)
+
+    @commands.slash_command(name="thread", description="Create a new basic thread")
+    @commands.has_permissions(create_public_threads=True)
+    async def thread(self, ctx, title: discord.Option(str, description="Title of thread", required=True), startmsg: discord.Option(str, description="Starting message in thread", required=True)):
+        message = await ctx.send(startmsg)
+        await message.create_thread(name=title)
+        await ctx.respond("Your thread, **{0}**, has been created!".format(title))
+
+    @commands.slash_command(name="gettime", description="Returns the current date and time.")
+    async def gettime(self, ctx):
+        await ctx.respond(time.ctime)
 
 
 
