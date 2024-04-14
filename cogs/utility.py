@@ -60,6 +60,25 @@ class utility(commands.Cog):
     async def resume(self, ctx):
         await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=True)
         await ctx.respond("Time has been resumed!")
+    
+    @commands.slash_command(name="userinfo", description="Gets info on a user in the server!")
+    async def userinfo(self, ctx, user: discord.Option(discord.Member, description="User to get info of", required=True))
+      embed = discord.Embed(
+            title="Info on {0}".format(user),
+            description="""
+            **ID:** user.id
+            **Joined Discord:** user.created_at
+            **Roles:** user.roles
+            **Discriminator:** user.discriminator
+            **Is A Bot?:** user.bot
+            """,
+            color=user.color,
+          
+          )
+          embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+          embed.set_thumbnail(url=user.avatar)
+          await ctx.respond(embed=embed)
+          
 
     @commands.slash_command(name="botinfo", description="Info about UltraBot!")
     async def botinfo(self, ctx):
