@@ -1,3 +1,108 @@
+import discord
+import os # default module
+from discord.ext import commands
+import json
+import logging
+import cowsay
+from discord import Option
+from discord import User
+from discord import Interaction
+from discord import InteractionResponse
+from discord import MessageInteraction
+from discord import interactions
+from discord import InteractionMessage
+import nltk
+import random
+nltk.download('words')
+
+with open("version.json", "r") as f:
+            _r = json.load(f)
+            VERSION = _r["VERSION"]
+
+
+
+# Defing bot and bot user intents
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix=';', intents=intents)
+
+logging.basicConfig(level=logging.DEBUG)
+#loading cogs
+bot.load_extension('cogs.moderation')
+bot.load_extension('cogs.fun')
+bot.load_extension('cogs.apis')
+bot.load_extension('cogs.disc2mbti')
+bot.load_extension('cogs.calculator')
+bot.load_extension('cogs.rps')
+bot.load_extension('cogs.utility')
+bot.load_extension('cogs.role')
+bot.load_extension('cogs.mcstatus')
+
+
+@bot.event
+async def on_ready():
+    status = discord.Game("in the Python CMD")
+    await bot.change_presence(activity=status)
+    bot.auto_sync_commands = True
+    logging.info("Bot is ready!")
+    await bot.user.edit(username="UltraBot")
+
+class ProblemView(discord.ui.View):
+   def __init__(self):
+      super().__init__(timeout=None)
+
+      supportServerButton = discord.ui.Button(label="Report GitHub issue", style=discord.ButtonStyle.gray, url="https://github.com/CombineSoldier14/UltraBot/issues/new")
+      self.add_item(supportServerButton)
+
+
+@bot.event
+async def on_application_command_error(interaction: discord.Interaction,
+                                        error: discord.DiscordException):
+    embed = discord.Embed(
+        title = "Whoops!",
+        description = "An error has occured.  Retrying the command might help, or this can be an internal server error",
+        color = discord.Colour.red()
+    )
+    embed.add_field(name="Error Message", value="`{0}`".format(repr(error)))
+
+    embed.set_thumbnail(url="https://i.imgur.com/KR3aiwB.png")
+    try:
+        await interaction.response.send_message(embed=embed, view=ProblemView())
+    except:
+        await interaction.followup.send(embed=embed, view=ProblemView())
+#UltraBot website button for /about
+class AboutLinkBloggerView(discord.ui.View):
+    def __init__(self):
+     super().__init__(timeout=None)
+
+     supportServerButton = discord.ui.Button(label='Learn More!', style=discord.ButtonStyle.gray, url='https://combinesoldier14.blogspot.com/p/ultrabot-links-faq.html')
+     self.add_item(supportServerButton)
+
+     supportServerButton = discord.ui.Button(label='GitHub', style=discord.ButtonStyle.gray, url='https://github.com/CombineSoldier14/UltraBot.py')
+     self.add_item(supportServerButton)
+    
+class InviteView(discord.ui.View):
+   def __init__(self):
+      super().__init__(timeout=None)
+
+      supportServerButton = discord.ui.Button(label="Invite UltraBot!", style=discord.ButtonStyle.gray, url="https://discord.com/oauth2/authorize?client_id=1225220764861730867")
+      self.add_item(supportServerButton)
+
+
+
+#This file main.py can be seen as a cog itself. Only basic commands are here!
+
+@bot.slash_command(name="ping", description="Sends the bot's ping or latency")
+async def ping(ctx):
+    await ctx.respond(f"Pong! Latency or ping is {bot.latency}")
+
+@bot.slash_command(name="helloworld", description="If your program can't say this, don't talk to me")
+async def helloworld(ctx):
+    await ctx.respond("Hello world!")
+
+
+
+
+
 @bot.slash_command(name="about", description="About the bot")
 async def about(ctx):
     embed = discord.Embed(
