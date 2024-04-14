@@ -20,6 +20,9 @@ with open("version.json", "r") as f:
             VERSION = _r["VERSION"]
 
 
+FRENCH = 420052952686919690
+
+
 
 # Defing bot and bot user intents
 intents = discord.Intents.all()
