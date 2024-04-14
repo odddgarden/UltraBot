@@ -15,8 +15,9 @@ with open("version.json", "r") as f:
             VERSION = _r["VERSION"]
 
 
-r = requests.get("https://official-joke-api.appspot.com/random_joke")
-j = json.loads(r.text)
+
+
+
 
 class Apis(commands.Cog):
     def __init__(self, bot):
@@ -24,6 +25,8 @@ class Apis(commands.Cog):
         self._last_member = None
     @commands.slash_command(name="dadjoke", description="Get a random dad joke!")
     async def dadjoke(self, ctx):
+        r = requests.get("https://official-joke-api.appspot.com/random_joke")
+        j = json.loads(r.text)
         await ctx.respond("{0} {1}".format(j["setup"], j["punchline"]))
     
     @commands.slash_command(name="xkcd", description="Get a random XKCD comic!")
@@ -56,6 +59,22 @@ class Apis(commands.Cog):
         embed.set_image(url=dogjson["message"])
         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
         await ctx.respond(embed=embed)
+    
+    @commands.slash_command(name="shakespeare", description="Translate english text to Shakespeare english!")
+    async def shakespeare(self, ctx, text: discord.Option(str, description="Text to translate", required=True)):
+         rshake = requests.get("https://api.funtranslations.com/translate/shakespeare.json?text={0}".format(text))
+         jshake = json.loads(rshake.text)
+
+         embed = discord.Embed(
+              title = jshake["contents"]["translated"],
+              description = jshake["contents"]["text"],
+              color = discord.Colour.orange(),
+         )
+         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         embed.set_thumbnail(url="https://hips.hearstapps.com/hmg-prod/images/william-shakespeare-194895-1-402.jpg")
+         await ctx.respond(embed=embed)
+         
+         
         
 
         
