@@ -63,19 +63,35 @@ class utility(commands.Cog):
     
     @commands.slash_command(name="userinfo", description="Gets info on a user in the server!")
     async def userinfo(self, ctx, user: discord.Option(discord.Member, description="User to get info of", required=True)):
-        embed = discord.Embed(
-            title="Info on {0}".format(user),
-            description="""
-            **ID:** {0}
-            **Joined Discord:** {1}
-            **Discriminator:** {2} 
-            **Is A Bot?:** {3} 
-            """.format(user.id, user.created_at, user.discriminator, user.bot),
-            color=user.color,
+        if user.bot == True:
+         embed = discord.Embed(
+             title="Info on {0}".format(user),
+             description="""
+             **ID:** {0}
+             **Joined Discord:** {1}
+             **Discriminator:** {2} 
+             **Is A Bot?:** {3} 
+             """.format(user.id, user.created_at, user.discriminator, user.bot),
+             color=user.color,
           
-        )
-        embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-        embed.set_thumbnail(url=user.avatar)
+         )
+         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         embed.set_thumbnail(url=user.avatar)
+        
+        if user.bot == False:
+    
+         embed = discord.Embed(
+             title="Info on {0}".format(user),
+             description="""
+             **ID:** {0}
+             **Joined Discord:** {1} 
+             **Is A Bot?:** {2} 
+             """.format(user.id, user.created_at, user.bot),
+             color=user.color,
+          
+         )
+         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         embed.set_thumbnail(url=user.avatar)
         await ctx.respond(embed=embed)
           
 
