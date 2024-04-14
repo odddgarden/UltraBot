@@ -2,6 +2,14 @@ import discord
 from discord.ext import commands
 import os
 import time
+import json
+
+with open("version.json", "r") as f:
+            _r = json.load(f)
+            VERSION = _r["VERSION"]
+
+
+
 
 class utility(commands.Cog):
     def __init__(self, bot):
@@ -33,6 +41,44 @@ class utility(commands.Cog):
     @commands.slash_command(name="gettime", description="Returns the current date and time.")
     async def gettime(self, ctx):
         await ctx.respond(time.ctime)
+
+    @commands.slash_command(name="timestop", description="Stop time in a server JJBA style")
+    @commands.has_permissions(manage_channels=True)
+    async def timestop(self, ctx):
+        await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=False)
+        embed = discord.Embed(
+            title="ZA WARUDO!",
+            description="Time has been stopped! No messages can be sent except for admins.",
+            color=discord.Colour.red(),
+        )
+        embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+        embed.set_image(url="https://i.redd.it/05vtn9chak101.gif")
+        await ctx.respond(embed=embed)
+
+    @commands.slash_command(name="resume", description="Resumes time in a server")
+    @commands.has_permissions(manage_channels=True)
+    async def resume(self, ctx):
+        await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=True)
+        await ctx.respond("Time has been resumed!")
+
+    @commands.slash_command(name="botinfo", description="Info about UltraBot!")
+    async def botinfo(self, ctx):
+         embed = discord.Embed(
+              title="Bot Info",
+              description="""
+              **Bot Name:** UltraBot
+              **Bot Owner:** @combinesoldier14
+              **Creation Date:** 4/5/2024
+              **Server Count:** Unavailable
+              **Library**: Py-cord {0}
+              """.format(discord.__version__),
+              color=discord.Colour.og_blurple(),
+         )
+         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         await ctx.respond(embed=embed)
+
+
 
 
 
