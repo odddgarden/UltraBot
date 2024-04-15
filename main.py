@@ -114,7 +114,7 @@ async def about(ctx):
         color=discord.Colour.yellow(),
     )
     embed.set_thumbnail(url="https://camo.githubusercontent.com/7ebe7e305bde0efefd93829ed13a016cbfcad30985449dd5d54f612174aceb44/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6170702d69636f6e732f313232353232303736343836313733303836372f66363662643462656234663165626565303638356438633563666436343662622e706e673f73697a653d323536")
-    embed.add_field(name="**Latest Addition**", value="Added /shakespeare!")
+    embed.add_field(name="**Latest Addition**", value="Added /dndrng!")
     await ctx.respond(embed=embed, view=AboutLinkBloggerView())
 
 
