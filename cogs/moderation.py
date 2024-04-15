@@ -92,21 +92,15 @@ class Moderation(commands.Cog):
 
     @commands.slash_command(name="createchannel", description="Creates a basic text channel")
     @commands.has_permissions(manage_channels=True)
-    async def createchannel(self, ctx, name: discord.Option(str, description="Name of channel")):
-        channelname1 = name.replace(" ", "_")
-        channelname2 = channelname1.lower
-        await create_text_channel(channelname2)
-        await ctx.respond("The channel **#{0}** has been created!".format(channelname2))
+    async def createchannel(self, ctx, name: discord.Option(str, description="Name of channel"), guild: discord.Option(discord.Guild, description="Name of server to make channel in. Case sensitive!")):
+        await guild.create_text_channel('{0}'.format(name))
+        await ctx.respond("The channel **#{0}** has been created!".format(name))
 
     @commands.slash_command(name="createvoicechannel", description="Creates a basic voice channel")
     @commands.has_permissions(manage_channels=True)
-    async def createvoicechannel(self, ctx, name: discord.Option(str, description="Name of channel")):
-        channelname1 = name.replace(" ", "_")
-        channelname2 = channelname1.lower
-        await create_voice_channel(channelname2)
-        await ctx.respond("The channel **#{0}** has been created!".format(channelname2))
-
-    
+    async def createchannel(self, ctx, name: discord.Option(str, description="Name of channel"), guild: discord.Option(discord.Guild, description="Name of server to make channel in. Case sensitive!")):
+        await guild.create_voice_channel('{0}'.format(name))
+        await ctx.respond("The channel **#{0}** has been created!".format(name))
 
 
     
