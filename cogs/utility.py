@@ -1,123 +1,67 @@
 import discord
 from discord.ext import commands
 import os
-import time
-import json
+from discord import reaction
+from discord import Reaction
+import random
 
-with open("version.json", "r") as f:
-            _r = json.load(f)
-            VERSION = _r["VERSION"]
-
-
-
-
-class utility(commands.Cog):
+class Calc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
-    
-    @commands.slash_command(name="avatar", description="Find the avatar of the mentioned user!")
-    async def avatar(self, ctx, user: discord.Option(discord.Member, description="Member to get avatar of", required=True)):
-      await ctx.respond(user.display_avatar)
-
-
-    @commands.slash_command(name="makeembed", description="Make your own embed!")
-    async def makeembed(self, ctx, title: discord.Option(str, description="Title of embed"), description: discord.Option(str, description="Description of embed"), footer: discord.Option(str, description="Footer of embed"), color: discord.Option(int, description="Color of embed in hex format")):
-        embed = discord.Embed(
-            title=title,
-            description=description,
-            color=color,
-        )
-        embed.set_footer(text=footer)
-        await ctx.respond(embed=embed)
-
-    @commands.slash_command(name="thread", description="Create a new basic thread")
-    @commands.has_permissions(create_public_threads=True)
-    async def thread(self, ctx, title: discord.Option(str, description="Title of thread", required=True), startmsg: discord.Option(str, description="Starting message in thread", required=True)):
-        message = await ctx.send(startmsg)
-        await message.create_thread(name=title)
-        await ctx.respond("Your thread, **{0}**, has been created!".format(title))
-
-    @commands.slash_command(name="gettime", description="Returns the current date and time.")
-    async def gettime(self, ctx):
-        await ctx.respond(time.ctime)
-
-    @commands.slash_command(name="timestop", description="Stop time in a server JJBA style")
-    @commands.has_permissions(manage_channels=True)
-    async def timestop(self, ctx):
-        await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=False)
-        embed = discord.Embed(
-            title="ZA WARUDO!",
-            description="Time has been stopped! No messages can be sent except for admins.",
-            color=discord.Colour.red(),
-        )
-        embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-        embed.set_image(url="https://i.redd.it/05vtn9chak101.gif")
-        await ctx.respond(embed=embed)
-
-    @commands.slash_command(name="resume", description="Resumes time in a server")
-    @commands.has_permissions(manage_channels=True)
-    async def resume(self, ctx):
-        await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=True)
-        await ctx.respond("Time has been resumed!")
-    
-    @commands.slash_command(name="userinfo", description="Gets info on a user in the server!")
-    async def userinfo(self, ctx, user: discord.Option(discord.Member, description="User to get info of", required=True)):
-        if user.bot == True:
-         embed = discord.Embed(
-             title="Info on {0}".format(user),
-             description="""
-             **ID:** {0}
-             **Joined Discord:** {1}
-             **Discriminator:** {2} 
-             **Is A Bot?:** {3} 
-             """.format(user.id, user.created_at, user.discriminator, user.bot),
-             color=user.color,
-          
-         )
-         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-         embed.set_thumbnail(url=user.avatar)
+     
+    @commands.slash_command(name="dndrng", description="Get a random number between 2 values and roll DND dice!")
+    async def dndrng(self, ctx, 
+                  d4: discord.Option(int, description="How many times to roll the D4 dice", required=False, default=0), 
+                  d6: discord.Option(int, description="How many times to roll the D6 dice", required=False, default=0),
+                  d8: discord.Option(int, description="How many times to roll the D8 dice", required=False, default=0),
+                  d10: discord.Option(int, description="How many times to roll the D10 dice", required=False, default=0),
+                  d12: discord.Option(int, description="How many times to roll the D12 dice", required=False, default=0),
+                  d20: discord.Option(int, description="How many times to roll the D20 dice", required=False, default=0),
+                  custommax: discord.Option(int, description="A custom maximum.", required=False, default=0),
+                  custommin: discord.Option(int, description="A custom minimum. MUST be accompanied by a custom maximum!!!", required=False, default=0),
+                  customamount: discord.Option(int, description="How many times to do the custom min/max", required=False, default=0)):
+        total = 0
+        for _d4 in range(d4):
+            total += random.randint(1, 4)
         
-        if user.bot == False:
+        for _d6 in range(d6):
+            total += random.randint(1, 6)
+
+        for _d8 in range(d8):
+            total += random.randint(1, 8)
+
+        for _d10 in range(d10):
+            total += random.randint(1, 10)
+
+        for _d12 in range(d12):
+            total += random.randint(1, 12)
+
+        for _d20 in range(d20):
+            total += random.randint(1, 20)
+
+        for _custom in range(customamount):
+            total += random.randint(custommin, custommax)
+
+        await ctx.respond(str(total))
+
+
+        
+
+        
+        
+        
     
-         embed = discord.Embed(
-             title="Info on {0}".format(user),
-             description="""
-             **ID:** {0}
-             **Joined Discord:** {1} 
-             **Is A Bot?:** {2} 
-             """.format(user.id, user.created_at, user.bot),
-             color=user.color,
-          
-         )
-         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-         embed.set_thumbnail(url=user.avatar)
-        await ctx.respond(embed=embed)
-          
+    @commands.slash_command(name="add", description="Adds 2 numbers together")
+    async def add(self, ctx, value1: discord.Option(int, description="The first number to add", required=True), value2: discord.Option(int, description="The second number to add", required=True)):
+        await ctx.respond(str(value1 + value2))
 
-    @commands.slash_command(name="botinfo", description="Info about UltraBot!")
-    async def botinfo(self, ctx):
-         embed = discord.Embed(
-              title="Bot Info",
-              description="""
-              **Bot Name:** UltraBot
-              **Bot Owner:** @combinesoldier14
-              **Creation Date:** 4/5/2024
-              **Server Count:** Unavailable
-              **Library**: Py-cord {0}
-              """.format(discord.__version__),
-              color=discord.Colour.og_blurple(),
-         )
-         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-         embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-         await ctx.respond(embed=embed)
+    @commands.slash_command(name="multiply", description="Multiplies 2 numbers together")
+    async def multiply(self, ctx, value1: discord.Option(int, description="The first number to multiply", required=True), value2: discord.Option(int, description="The second number to multiply", required=True)):
+        await ctx.respond(str(value1 * value2))
 
+    @commands.slash_command(name="divide", description="Divides 2 numbers")
+    async def divide(self, ctx, value1: discord.Option(int, description="The first number to divide", required=True), value2: discord.Option(int, description="The second number to divide", required=True)):
+        await ctx.respond(str(value1 / value2))
 
-
-
-
-
-
-
-def setup(bot): # this is called by Pycord to setup the cog
-    bot.add_cog(utility(bot)) # add the cog to the bot
+    
