@@ -100,7 +100,7 @@ class Moderation(commands.Cog):
 
     @commands.slash_command(name="createvoicechannel", description="Creates a basic voice channel")
     @commands.has_permissions(manage_channels=True)
-    async def createchannel(self, ctx, name: discord.Option(str, description="Name of channel")):
+    async def createvoicechannel(self, ctx, name: discord.Option(str, description="Name of channel")):
         channelname1 = name.replace(" ", "_")
         channelname2 = channelname1.lower
         await create_voice_channel(channelname2)
