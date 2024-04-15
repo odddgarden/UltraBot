@@ -47,7 +47,7 @@ async def on_ready():
     await bot.change_presence(activity=status)
     bot.auto_sync_commands = True
     logging.info("Bot is ready!")
-    await bot.user.edit(username="UltraBot")
+    
 
 class ProblemView(discord.ui.View):
    def __init__(self):
