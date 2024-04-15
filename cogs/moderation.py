@@ -89,6 +89,23 @@ class Moderation(commands.Cog):
         await user.remove_timeout()
         await ctx.respond("{0} has had their timeout removed!".format(user))
 
+
+    @commands.slash_command(name="createchannel", description="Creates a basic text channel")
+    @commands.has_permissions(manage_channels=True)
+    async def createchannel(self, ctx, name: discord.Option(str, description="Name of channel")):
+        channelname1 = name.replace(" ", "_")
+        channelname2 = channelname1.lower
+        await create_text_channel(channelname2)
+        await ctx.respond("The channel **#{0}** has been created!".format(channelname2))
+
+    @commands.slash_command(name="createvoicechannel", description="Creates a basic voice channel")
+    @commands.has_permissions(manage_channels=True)
+    async def createchannel(self, ctx, name: discord.Option(str, description="Name of channel")):
+        channelname1 = name.replace(" ", "_")
+        channelname2 = channelname1.lower
+        await create_voice_channel(channelname2)
+        await ctx.respond("The channel **#{0}** has been created!".format(channelname2))
+
     
 
 
