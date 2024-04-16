@@ -6,7 +6,7 @@ import os
 
 
 class Disc2mbti(commands.Cog):
-    group = discord.SlashCommandGroup(name="fun", description="Non-serious commands for fun and enjoyment")
+    group = discord.SlashCommandGroup(name="mbti", description="Commands relating to the Myers-Briggs Type Indicator personality system")
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
