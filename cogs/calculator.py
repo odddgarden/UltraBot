@@ -5,12 +5,15 @@ from discord import reaction
 from discord import Reaction
 import random
 
+calc = discord.SlashCommandGroup(name="calc", description="Commands for calculating numbers")
+
 class Calc(commands.Cog):
+    group = discord.SlashCommandGroup(name="calc", description="Commands for calculating numbers")
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
      
-    @commands.slash_command(name="dndrng", description="Get a random number between 2 values and roll DND dice!")
+    @group.command(name="dndrng", description="Get a random number between 2 values and roll DND dice!")
     async def dndrng(self, ctx, 
                   d4: discord.Option(int, description="How many times to roll the D4 dice", required=False, default=0), 
                   d6: discord.Option(int, description="How many times to roll the D6 dice", required=False, default=0),
@@ -57,15 +60,15 @@ class Calc(commands.Cog):
         
         
     
-    @commands.slash_command(name="add", description="Adds 2 numbers together")
+    @group.command(name="add", description="Adds 2 numbers together")
     async def add(self, ctx, value1: discord.Option(int, description="The first number to add", required=True), value2: discord.Option(int, description="The second number to add", required=True)):
         await ctx.respond(str(value1 + value2))
 
-    @commands.slash_command(name="multiply", description="Multiplies 2 numbers together")
+    @group.command(name="multiply", description="Multiplies 2 numbers together")
     async def multiply(self, ctx, value1: discord.Option(int, description="The first number to multiply", required=True), value2: discord.Option(int, description="The second number to multiply", required=True)):
         await ctx.respond(str(value1 * value2))
 
-    @commands.slash_command(name="divide", description="Divides 2 numbers")
+    @group.command(name="divide", description="Divides 2 numbers")
     async def divide(self, ctx, value1: discord.Option(int, description="The first number to divide", required=True), value2: discord.Option(int, description="The second number to divide", required=True)):
         await ctx.respond(str(value1 / value2))
 
