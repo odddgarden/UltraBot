@@ -9,11 +9,14 @@ with open("version.json", "r") as f:
             _r = json.load(f)
             VERSION = _r["VERSION"]
 
+
+
 class Rps(commands.Cog):
+    group = discord.SlashCommandGroup(name="fun", description="Non-serious commands for fun and enjoyment")
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
-    @commands.slash_command(title="rps", description="Play Rock Paper Scissors with UltraBot!")
+    @group.command(title="rps", description="Play Rock Paper Scissors with UltraBot!")
     async def rps(self, ctx, choice: discord.Option(str, description="Your choice! Choose either rock, paper, or scissors.")):
         user_choice = choice.lower()
         bot_choice = random.choice(WORDS)
