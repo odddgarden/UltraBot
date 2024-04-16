@@ -13,6 +13,17 @@ from discord import interactions
 from discord import InteractionMessage
 import nltk
 import random
+#time for a shit load of catagories -_-
+import cogs.apis
+import cogs.calculator
+import cogs.disc2mbti
+import cogs.fun
+import cogs.mcstatus
+import cogs.moderation
+import cogs.role
+import cogs.rps
+import cogs.utility
+
 nltk.download('words')
 
 with open("version.json", "r") as f:
@@ -94,6 +105,8 @@ class InviteView(discord.ui.View):
 
 #This file main.py can be seen as a cog itself. Only basic commands are here!
 
+
+
 @bot.slash_command(name="ping", description="Sends the bot's ping or latency")
 async def ping(ctx):
     await ctx.respond(f"Pong! Latency or ping is {bot.latency}")
@@ -120,7 +133,7 @@ async def about(ctx):
 
 # say is intentionally not a slash command.
 #The french people joke is an inside joke with my friends. I'm not racist! :)
-@bot.command(name="say")
+@bot.slash_command(name="say")
 async def _say(ctx, *, args):
     if ctx.author.id == FRENCH:
         await ctx.send(":middle_finger: I don't take orders from French people, bozo!!!")
@@ -159,3 +172,4 @@ if __name__ == "__main__": # import run prevention
         raise EnvironmentError("No token specified!  Please enter a token via token.json or by passing an environment variable called 'BOT_TOKEN'.  Stop.")
     BOT_TOKEN = (environToken if environToken != None else loadedJSONToken)    
     bot.run(BOT_TOKEN)
+
