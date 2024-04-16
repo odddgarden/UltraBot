@@ -9,8 +9,8 @@ with open("version.json", "r") as f:
             VERSION = _r["VERSION"]
 
 
-class utility(commands.Cog):
-    group = discord.SlashCommandGroup(name="utility", description="Useful utility commands")
+class fun(commands.Cog):
+    group = discord.SlashCommandGroup(name="fun", description="Fun commands for your enjoyment")
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
@@ -113,4 +113,4 @@ class utility(commands.Cog):
 
 
 def setup(bot): # this is called by Pycord to setup the cog
-    bot.add_cog(utility(bot)) # add the cog to the bot
+    bot.add_cog(fun(bot)) # add the cog to the bot
