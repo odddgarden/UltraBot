@@ -1,119 +1,87 @@
 import discord
 from discord.ext import commands
 import os
-import time
 import json
+import mcstatus
+from mcstatus import JavaServer
+from mcstatus import BedrockServer
 
 with open("version.json", "r") as f:
             _r = json.load(f)
             VERSION = _r["VERSION"]
 
 
+
+
 class mcstatus(commands.Cog):
-    group = discord.SlashCommandGroup(name="minecraft", description="Commands for minecraft data!")
+    group = discord.SlashCommandGroup(name="minecraft", description="Commands related to Minecraft!")
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
     
-    @group.command(name="avatar", description="Find the avatar of the mentioned user!")
-    async def avatar(self, ctx, user: discord.Option(discord.Member, description="Member to get avatar of", required=True)):
-      await ctx.respond(user.display_avatar)
+    @group.command(name="mcjava", description="Get the status of a minecraft java server!")
+    async def mcjava(self, ctx, host: discord.Option(str, description="Server URL to get info on.", required=True), port: discord.Option(int, description="The port of the Minecraft server", default=25565)):
+           await ctx.defer()
+           addr = "{0}:{1}".format(host, port)
+           serverjava = JavaServer.lookup(addr)
+           javastatus = serverjava.status()
+           javalatency = javastatus.latency
+           javaonline = javastatus.players.online
+           javamaximum = javastatus.players.max
+           javaprotocol = javastatus.version.protocol
+           javaversion = javastatus.version.name
+           
+           
+           embed = discord.Embed(
+                  title="Info for {0}:{1}".format(host, port),
+                  description="Info on the current minecraft server",
+                  color=discord.Colour.green(),
+           )
+           embed.add_field(name="Player(s) Online", value="{0}/{1}".format(javaonline, javamaximum))
+           embed.add_field(name="Latency", value=f"{javalatency} ms")
+           embed.add_field(name="Version/Protocol", value="{0} (Protocol {1})".format(javaversion, javaprotocol))
+           embed.add_field(name="Secure Chat?", value=str(javastatus.enforces_secure_chat))
+           embed.set_thumbnail(url="https://static-00.iconduck.com/assets.00/java-icon-1511x2048-6ikx8301.png")
+           embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+           
+           
+           await ctx.respond(embed=embed)
 
+    @group.command(name="mcbedrock", description="Get the status of a minecraft bedrock server!")
+    async def mcbedrock(self, ctx, hosturl: discord.Option(str, description="Server URL to get info on.", required=True), portnumber: discord.Option(int, description="The port of the Minecraft server", default=25565)):
+           await ctx.defer()
+           bedrockaddr = "{0}:{1}".format(hosturl, portnumber)
+           serverbedrock = BedrockServer.lookup(bedrockaddr)
+           bedrockstatus = serverbedrock.status()
+           bedrocklatency = bedrockstatus.latency
+           bedrockonline = bedrockstatus.players.online
+           bedrockmaximum = bedrockstatus.players.max
+           bedrockprotocol = bedrockstatus.version.protocol
+           bedrockversion = bedrockstatus.version.name
+           
+           
+           embed = discord.Embed(
+                  title="Info for {0}:{1}".format(hosturl, portnumber),
+                  description="Info on the current minecraft server",
+                  color=discord.Colour.green(),
+           )
+           embed.add_field(name="Player(s) Online", value="{0}/{1}".format(bedrockonline, bedrockmaximum))
+           embed.add_field(name="Latency", value=f"{bedrocklatency} ms")
+           embed.add_field(name="Version/Protocol", value="{0} (Protocol {1})".format(bedrockversion, bedrockprotocol))
+           embed.set_thumbnail(url="https://gamepedia.cursecdn.com/minecraft_gamepedia/6/68/Bedrock_JE2_BE2.png?version=fe113612ba2231b70dbf6627c699e644")
+           embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+           
+           
+           await ctx.respond(embed=embed)
 
-    @group.command(name="makeembed", description="Make your own embed!")
-    async def makeembed(self, ctx, title: discord.Option(str, description="Title of embed"), description: discord.Option(str, description="Description of embed"), footer: discord.Option(str, description="Footer of embed"), color: discord.Option(int, description="Color of embed in hex format")):
-        embed = discord.Embed(
-            title=title,
-            description=description,
-            color=color,
-        )
-        embed.set_footer(text=footer)
-        await ctx.respond(embed=embed)
 
     
-    @group.command(name="gettime", description="Returns the current date and time.")
-    async def gettime(self, ctx):
-        await ctx.respond(time.ctime)
-
-    @group.command(name="timestop", description="Stop time in a server JJBA style")
-    @commands.has_permissions(manage_channels=True)
-    async def timestop(self, ctx):
-        await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=False)
-        embed = discord.Embed(
-            title="ZA WARUDO!",
-            description="Time has been stopped! No messages can be sent except for admins.",
-            color=discord.Colour.red(),
-        )
-        embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-        embed.set_image(url="https://i.redd.it/05vtn9chak101.gif")
-        await ctx.respond(embed=embed)
-
-    @group.command(name="resume", description="Resumes time in a server")
-    @commands.has_permissions(manage_channels=True)
-    async def resume(self, ctx):
-        await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=True)
-        await ctx.respond("Time has been resumed!")
-    
-    @group.command(name="userinfo", description="Gets info on a user in the server!")
-    async def userinfo(self, ctx, user: discord.Option(discord.Member, description="User to get info of", required=True)):
-        if user.bot == True:
-         embed = discord.Embed(
-             title="Info on {0}".format(user),
-             description="""
-             **ID:** {0}
-             **Joined Discord:** {1}
-             **Discriminator:** {2} 
-             **Is A Bot?:** {3} 
-             """.format(user.id, user.created_at, user.discriminator, user.bot),
-             color=user.color,
-          
-         )
-         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-         embed.set_thumbnail(url=user.avatar)
-        
-        if user.bot == False:
-    
-         embed = discord.Embed(
-             title="Info on {0}".format(user),
-             description="""
-             **ID:** {0}
-             **Joined Discord:** {1} 
-             **Is A Bot?:** {2} 
-             """.format(user.id, user.created_at, user.bot),
-             color=user.color,
-          
-         )
-         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-         embed.set_thumbnail(url=user.avatar)
-        await ctx.respond(embed=embed)
-          
-
-    @group.command(name="botinfo", description="Info about UltraBot!")
-    async def botinfo(self, ctx):
-         embed = discord.Embed(
-              title="Bot Info",
-              description="""
-              **Bot Name:** UltraBot
-              **Bot Owner:** @combinesoldier14
-              **Creation Date:** 4/5/2024
-              **Server Count:** Unavailable
-              **Library**: Py-cord {0}
-              """.format(discord.__version__),
-              color=discord.Colour.og_blurple(),
-         )
-         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-         embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
-         await ctx.respond(embed=embed)
-
-
-
-
-
-
-
 
 def setup(bot): # this is called by Pycord to setup the cog
-    bot.add_cog(utility(bot)) # add the cog to the bot
+    bot.add_cog(mcstatus(bot)) # add the cog to the bot
+
+           
+
 
 
            
