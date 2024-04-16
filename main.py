@@ -13,16 +13,7 @@ from discord import interactions
 from discord import InteractionMessage
 import nltk
 import random
-#time for a shit load of catagories -_-
-import cogs.apis
-import cogs.calculator
-import cogs.disc2mbti
-import cogs.fun
-import cogs.mcstatus
-import cogs.moderation
-import cogs.role
-import cogs.rps
-import cogs.utility
+
 
 nltk.download('words')
 
