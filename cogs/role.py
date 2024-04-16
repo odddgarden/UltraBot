@@ -7,7 +7,7 @@ from discord import Reaction
 
 
 class role(commands.Cog):
-    group = discord.SlashCommandGroup(name="moderation", description="Commands for server management and moderation")
+    group = discord.SlashCommandGroup(name="role", description="Commands for managing roles")
 
     def __init__(self, bot):
         self.bot = bot
