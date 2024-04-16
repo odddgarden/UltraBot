@@ -9,8 +9,8 @@ with open("version.json", "r") as f:
             VERSION = _r["VERSION"]
 
 
-class utility(commands.Cog):
-    group = discord.SlashCommandGroup(name="utility", description="Useful utility commands")
+class mcstatus(commands.Cog):
+    group = discord.SlashCommandGroup(name="minecraft", description="Commands for minecraft data!")
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
