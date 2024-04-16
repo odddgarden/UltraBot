@@ -22,7 +22,7 @@ class Moderation(commands.Cog):
 
 
     @group.command(name="userid", description="Find the ID of a mentioned user")
-    async def userid(self, ctx, user: discord.Option(discord.Member, description="Member to find ID of", required="true")):
+    async def userid(self, ctx, user: discord.Option(discord.Member, description="Member to find ID of", required=True)):
       await ctx.respond(f"That user's id is " + str(user.id))
 
     @group.command(name="ban", description="Bans a user.")
