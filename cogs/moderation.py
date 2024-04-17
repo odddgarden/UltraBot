@@ -67,7 +67,7 @@ class Moderation(commands.Cog):
        
        emoji = '\N{THUMBS UP SIGN}'
        emoji2 = '\N{THUMBS DOWN SIGN}'
-       message = await ctx.send(embed=embed)
+       message = await ctx.respond(embed=embed)
        await message.add_reaction(emoji)
        await message.add_reaction(emoji2)
     
