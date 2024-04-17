@@ -86,7 +86,7 @@ class Mbti(commands.Cog):
                        question22: discord.Option(str, description="I am always organized with access to everything.", choices=["yes", "no"]),
                        question23: discord.Option(str, description="I get distracted very easily.", choices=["yes", "no"]),
                        question24: discord.Option(str, description="I usually do the bare minimum needed for things and not put in extra effort.", choices=["yes", "no"]),
-                       gender: discord.Option(str, description="Your gender for icon on the embed", choices=["male", "female"]),
+                      
                        ):
      inumber = 0
      enumber = 0
