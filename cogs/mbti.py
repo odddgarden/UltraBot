@@ -59,6 +59,8 @@ class Mbti(commands.Cog):
                        question4: discord.Option(str, description="I get anxious and overwhelmed if I'm in a crowd of people for long enough.", choices=["yes", "no"]),
                        question5: discord.Option(str, description="I am quite popular in my respective social group.", choices=["yes", "no"]),
                        
+
+                       
                        #S or N questions
                        question6: discord.Option(str, description="I like to participate in sports.", choices=["yes", "no"]),
                        question7: discord.Option(str, description="I'm always thinking about other things when I do things.", choices=["yes", "no"]),
@@ -67,21 +69,24 @@ class Mbti(commands.Cog):
                        question10: discord.Option(str, description="I can tell very well what other people are thinking just by looking at them.", choices=["yes", "no"]),
                        question11: discord.Option(str, description="I honor tradition.", choices=["yes", "no"]),
                        question12: discord.Option(str, description="I prefer to use trusted methods then innovate.", choices=["yes", "no"]),
+                       question13: discord.Option(str, description="I like to come up with a lot of ideas", choices=["yes", "no"]),
+
 
                        #T vs F questions
-                       question13: discord.Option(str, description="I am good at puzzles.", choices=["yes", "no"]),
-                       question14: discord.Option(str, description="My emotions control me more than I control them.", choices=["yes", "no"]),
-                       question15: discord.Option(str, description="I tend to feel insecure/depressed often.", choices=["yes", "no"]),
-                       question16: discord.Option(str, description="I like to focus on science and the facts rather than my own beliefs.", choices=["yes", "no"]),
-                       question17: discord.Option(str, description="I always need someone to rely on for things.", choices=["yes", "no"]),
-                       question18: discord.Option(str, description="I like solutions that are efficient rather then ones that make people happy.", choices=["yes", "no"]),
+                       question14: discord.Option(str, description="I am good at puzzles.", choices=["yes", "no"]),
+                       question15: discord.Option(str, description="My emotions control me more than I control them.", choices=["yes", "no"]),
+                       question16: discord.Option(str, description="I tend to feel insecure/depressed often.", choices=["yes", "no"]),
+                       question17: discord.Option(str, description="I like to focus on science and the facts rather than my own beliefs.", choices=["yes", "no"]),
+                       question18: discord.Option(str, description="I always need someone to rely on for things.", choices=["yes", "no"]),
+                       question19: discord.Option(str, description="I like solutions that are efficient rather then ones that make people happy.", choices=["yes", "no"]),
 
                        #P vs J questions
-                       question19: discord.Option(str, description="I like to make a lot of backup plans to make sure there's a way for everything.", choices=["yes", "no"]),
-                       question20: discord.Option(str, description="I like to just do whatever I feel like doing instead of having a schedule.", choices=["yes", "no"]),
-                       question21: discord.Option(str, description="I am always organized with access to everything.", choices=["yes", "no"]),
-                       question22: discord.Option(str, description="I get distracted very easily.", choices=["yes", "no"]),
-                       question23: discord.Option(str, description="I usually do the bare minimum needed for things and not put in extra effort.", choices=["yes", "no"]),
+                       question20: discord.Option(str, description="I like to make a lot of backup plans to make sure there's a way for everything.", choices=["yes", "no"]),
+                       question21: discord.Option(str, description="I like to just do whatever I feel like doing instead of having a schedule.", choices=["yes", "no"]),
+                       question22: discord.Option(str, description="I am always organized with access to everything.", choices=["yes", "no"]),
+                       question23: discord.Option(str, description="I get distracted very easily.", choices=["yes", "no"]),
+                       question24: discord.Option(str, description="I usually do the bare minimum needed for things and not put in extra effort.", choices=["yes", "no"]),
+                       gender: discord.Option(str, description="Your gender for icon on the embed", choices=["male", "female"]),
                        ):
      inumber = 0
      enumber = 0
@@ -153,12 +158,14 @@ class Mbti(commands.Cog):
      else:
          nnumber += 1
 
-     if question13 == "yes":
-         tnumber += 1
-     else:
-         fnumber += 1
+     
 
-     if question14 == "no":
+     if question13 == "no":
+         snumber += 1
+     else:
+         nnumber += 1
+
+     if question14 == "yes":
          tnumber += 1
      else:
          fnumber += 1
@@ -168,37 +175,37 @@ class Mbti(commands.Cog):
      else:
          fnumber += 1
 
-     if question16 == "yes":
+     if question16 == "no":
          tnumber += 1
      else:
          fnumber += 1
 
-     if question17 == "no":
+     if question17 == "yes":
          tnumber += 1
      else:
          fnumber += 1
 
-     if question18 == "yes":
+     if question18 == "no":
          tnumber += 1
      else:
          fnumber += 1
 
-     if question19 == "no":
+     if question19 == "yes":
+         tnumber += 1
+     else:
+         fnumber += 1
+
+     if question20 == "no":
          pnumber += 1
      else:
          jnumber += 1
 
-     if question20 == "yes":
+     if question21 == "yes":
          pnumber += 1
      else:
          jnumber += 1
 
-     if question21 == "no":
-         pnumber += 1
-     else:
-         jnumber += 1
-
-     if question22 == "yes":
+     if question22 == "no":
          pnumber += 1
      else:
          jnumber += 1
@@ -207,43 +214,20 @@ class Mbti(commands.Cog):
          pnumber += 1
      else:
          jnumber += 1
+
+     if question24 == "yes":
+         pnumber += 1
+     else:
+         jnumber += 1
          
-     if inumber > enumber:
-         iestatus = "I"
-         ielong = "Introverted"
-         
-
-     else:
-         iestatus = "E"
-         ielong = "Extroverted"
-
-     if snumber > nnumber:
-         snstatus = "S"
-         snlong = "Sensing"
-     else:
-         snstatus = "N"
-         snlong = "Intuitive"
-
-     if tnumber > fnumber:
-         tfstatus = "T"
-         tflong = "Thinking"
-     else:
-         tfstatus = "F"
-         tflong = "Feeling"
-
-     if pnumber > jnumber:
-         pjstatus = "P"
-         pjlong = "Perceiving"
-     else:
-         pjstatus = "J"
-         pjlong = "Judging"
+     
 
      #now for percentages
 
      iperc1 = inumber / 5
      eperc1 = enumber / 5
-     sperc1 = snumber / 7
-     nperc1 = nnumber / 7
+     sperc1 = snumber / 8
+     nperc1 = nnumber / 8
      tperc1 = tnumber / 6
      fperc1 = fnumber / 6
      pperc1 = pnumber / 5
@@ -264,6 +248,45 @@ class Mbti(commands.Cog):
      fperc3 = round(fperc2, 0)
      pperc3 = round(pperc2, 0)
      jperc3 = round(jperc2, 0)
+
+
+     if iperc3 > eperc3:
+         iestatus = "I"
+         ielong = "Introverted"
+         
+
+     else:
+         iestatus = "E"
+         ielong = "Extroverted"
+
+     if snumber > nnumber:
+         snstatus = "S"
+         snlong = "Sensing"
+     
+
+     
+    
+    
+     else:
+         snstatus = "N"
+         snlong = "Intuitive"
+
+     if tnumber > fnumber:
+         tfstatus = "T"
+         tflong = "Thinking"
+     else:
+         tfstatus = "F"
+         tflong = "Feeling"
+
+     if pnumber > jnumber:
+         pjstatus = "P"
+         pjlong = "Perceiving"
+     else:
+         pjstatus = "J"
+         pjlong = "Judging"
+
+     
+
 
      
 
@@ -296,4 +319,3 @@ class Mbti(commands.Cog):
 
 def setup(bot): # this is called by Pycord to setup the cog
     bot.add_cog(Mbti(bot)) # add the cog to the bot
-
