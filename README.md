@@ -5,6 +5,15 @@
 ## What is it?
 UltraBot is a full open source discord bot made by me. It has plenty of slash commands for moderation and fun, made because again, robots are cool.
 
+## Features!
+-MBTI Test command
+
+-No premium or paid features
+
+-Make your own embed command
+
+-Updated nearly every day with 40+ slash commands!
+
 ## Credits
 **Credit to [AlphaGameDeveloper](https://github.com/AlphaGameDeveloper) for helping me out with some of the code.  His bot can be found [here](https://github.com/AlphaGameDeveloper/AlphaGameBot).**
 
