@@ -129,7 +129,7 @@ async def about(ctx):
 
 # say is intentionally not a slash command.
 #The french people joke is an inside joke with my friends. I'm not racist! :)
-@bot.slash_command(name="say")
+@bot.command(name="say")
 async def _say(ctx, *, args):
     if ctx.author.id == FRENCH:
         await ctx.send(":middle_finger: I don't take orders from French people, bozo!!!")
