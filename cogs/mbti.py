@@ -5,7 +5,7 @@ import os
 
 
 
-class Disc2mbti(commands.Cog):
+class Mbti(commands.Cog):
     group = discord.SlashCommandGroup(name="mbti", description="Commands relating to the Myers-Briggs Type Indicator personality system")
     def __init__(self, bot):
         self.bot = bot
@@ -49,6 +49,213 @@ class Disc2mbti(commands.Cog):
         await ctx.respond("Your MBTI is: {0}{1}{2}{3}".format(IE, SN, TF, PJ))
         await ctx.send("_({0}, {1}, {2}, and {3})_".format(longIE, longSN, longTF, longPJ))
 
+    @group.command(title="mbtitest", description="Take a test to figure out your MBTI personality type!")
+    async def mbtitest(self, ctx, 
+                       
+                       #I or E questions
+                       question1: discord.Option(str, description="I prefer to be around others usually.", choices=["yes", "no"]),
+                       question2: discord.Option(str, description="I get more energy from my close friends than other people.", choices=["yes", "no"]),
+                       question3: discord.Option(str, description="I always love when I'm the center of attention.", choices=["yes", "no"]),
+                       question4: discord.Option(str, description="I get anxious and overwhelmed if I'm in a crowd of people for long enough.", choices=["yes", "no"]),
+                       question5: discord.Option(str, description="I am quite popular in my respective social group.", choices=["yes", "no"]),
+                       
+                       #S or N questions
+                       question6: discord.Option(str, description="I like to participate in sports.", choices=["yes", "no"]),
+                       question7: discord.Option(str, description="I'm always thinking about other things when I do things.", choices=["yes", "no"]),
+                       question8: discord.Option(str, description="I'm able to think quickly in intense situations.", choices=["yes", "no"]),
+                       question9: discord.Option(str, description="I like to make up stories and realities in my head.", choices=["yes", "no"]),
+                       question10: discord.Option(str, description="I can tell very well what other people are thinking just by looking at them.", choices=["yes", "no"]),
+                       question11: discord.Option(str, description="I honor tradition.", choices=["yes", "no"]),
+                       question12: discord.Option(str, description="I prefer to use trusted methods then innovate.", choices=["yes", "no"]),
+
+                       #T vs F questions
+                       question13: discord.Option(str, description="I am good at puzzles.", choices=["yes", "no"]),
+                       question14: discord.Option(str, description="My emotions control me more than I control them.", choices=["yes", "no"]),
+                       question15: discord.Option(str, description="I tend to feel insecure/depressed often.", choices=["yes", "no"]),
+                       question16: discord.Option(str, description="I like to focus on science and the facts rather than my own beliefs.", choices=["yes", "no"]),
+                       question17: discord.Option(str, description="I always need someone to rely on for things.", choices=["yes", "no"]),
+                       question18: discord.Option(str, description="I like solutions that are efficient rather then ones that make people happy.", choices=["yes", "no"]),
+
+                       #P vs J questions
+                       question19: discord.Option(str, description="I like to make a lot of backup plans to make sure there's a way for everything.", choices=["yes", "no"]),
+                       question20: discord.Option(str, description="I like to just do whatever I feel like doing instead of having a schedule.", choices=["yes", "no"]),
+                       question21: discord.Option(str, description="I am always organized with access to everything.", choices=["yes", "no"]),
+                       question22: discord.Option(str, description="I get distracted very easily.", choices=["yes", "no"]),
+                       question23: discord.Option(str, description="I usually do the bare minimum needed for things and not put in extra effort.", choices=["yes", "no"]),
+                       ):
+     inumber = 0
+     enumber = 0
+     snumber = 0
+     nnumber = 0
+     tnumber = 0
+     fnumber = 0
+     pnumber = 0
+     jnumber = 0
+
+     if question1 == "yes":
+         enumber += 1
+     else:
+         inumber += 1
+
+     if question2 == "yes":
+         inumber += 1
+     else:
+         enumber += 1
+
+     if question3 == "no":
+         inumber += 1
+     else:
+         enumber += 1
+
+     if question4 == "yes":
+         inumber += 1
+     else:
+         enumber += 1
+
+     if question5 == "no":
+         inumber += 1
+     else:
+         enumber += 1
+
+     if question6 == "yes":
+         snumber += 1
+     else:
+         nnumber += 1
+
+     
+     if question7 == "no":
+         nnumber += 1
+     else:
+         snumber += 1
+
+     if question8 == "yes":
+         snumber += 1
+     else:
+         nnumber += 1
+
+     if question9 == "no":
+         snumber += 1
+     else:
+         nnumber += 1
+
+     if question10 == "yes":
+         snumber += 1
+     else:
+         nnumber += 1
+
+     if question11 == "yes":
+         snumber += 1
+     else:
+         nnumber += 1
+
+     if question12 == "yes":
+         snumber += 1
+     else:
+         nnumber += 1
+
+     if question13 == "yes":
+         tnumber += 1
+     else:
+         fnumber += 1
+
+     if question14 == "no":
+         tnumber += 1
+     else:
+         fnumber += 1
+
+     if question15 == "no":
+         tnumber += 1
+     else:
+         fnumber += 1
+
+     if question16 == "yes":
+         tnumber += 1
+     else:
+         fnumber += 1
+
+     if question17 == "no":
+         tnumber += 1
+     else:
+         fnumber += 1
+
+     if question18 == "yes":
+         tnumber += 1
+     else:
+         fnumber += 1
+
+     if question19 == "no":
+         pnumber += 1
+     else:
+         jnumber += 1
+
+     if question20 == "yes":
+         pnumber += 1
+     else:
+         jnumber += 1
+
+     if question21 == "no":
+         pnumber += 1
+     else:
+         jnumber += 1
+
+     if question22 == "yes":
+         pnumber += 1
+     else:
+         jnumber += 1
+
+     if question23 == "yes":
+         pnumber += 1
+     else:
+         jnumber += 1
+         
+     if inumber > enumber:
+         iestatus = "I"
+         ielong = "Introverted"
+
+     else:
+         iestatus = "E"
+         ielong = "Extroverted"
+
+     if snumber > nnumber:
+         snstatus = "S"
+         snlong = "Sensing"
+     else:
+         snstatus = "N"
+         snlong = "Intuitive"
+
+     if tnumber > fnumber:
+         tfstatus = "T"
+         tflong = "Thinking"
+     else:
+         tfstatus = "F"
+         tflong = "Feeling"
+
+     if pnumber > jnumber:
+         pjstatus = "P"
+         pjlong = "Perceiving"
+     else:
+         pjstatus = "J"
+         pjlong = "Judging"
+
+     embed = discord.Embed(
+         title="Your MBTI: {0}{1}{2}{3}".format(iestatus, snstatus, tfstatus, pjstatus),
+         description="_{0}, {1}, {2}, and {3}_".format(ielong, snlong, tflong, pjlong),
+         color=discord.Colour.red()
+     )
+     embed.set_footer(text="Learn more about this type: https://www.16personalities.com/{0}{1}{2}{3}-personality".format(iestatus.lower(), snstatus.lower(), tfstatus.lower(), pjstatus.lower()))
+     await ctx.respond(embed=embed)
+
+
+
+
+     
+
+
+
+        
+     
+
 
 def setup(bot): # this is called by Pycord to setup the cog
-    bot.add_cog(Disc2mbti(bot)) # add the cog to the bot
+    bot.add_cog(Mbti(bot)) # add the cog to the bot
+
