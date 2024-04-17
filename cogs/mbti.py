@@ -211,6 +211,7 @@ class Mbti(commands.Cog):
      if inumber > enumber:
          iestatus = "I"
          ielong = "Introverted"
+         
 
      else:
          iestatus = "E"
@@ -237,9 +238,46 @@ class Mbti(commands.Cog):
          pjstatus = "J"
          pjlong = "Judging"
 
+     #now for percentages
+
+     iperc1 = inumber / 5
+     eperc1 = enumber / 5
+     sperc1 = snumber / 7
+     nperc1 = nnumber / 7
+     tperc1 = tnumber / 6
+     fperc1 = fnumber / 6
+     pperc1 = pnumber / 5
+     jperc1 = jnumber / 5
+     iperc2 = iperc1 * 100
+     eperc2 = eperc1 * 100
+     sperc2 = sperc1 * 100
+     nperc2 = nperc1 * 100
+     tperc2 = tperc1 * 100
+     fperc2 = fperc1 * 100
+     pperc2 = pperc1 * 100
+     jperc2 = jperc1 * 100
+     iperc3 = round(iperc2, 0)
+     eperc3 = round(eperc2, 0)
+     sperc3 = round(sperc2, 0)
+     nperc3 = round(nperc2, 0)
+     tperc3 = round(tperc2, 0)
+     fperc3 = round(fperc2, 0)
+     pperc3 = round(pperc2, 0)
+     jperc3 = round(jperc2, 0)
+
+     
+
      embed = discord.Embed(
          title="Your MBTI: {0}{1}{2}{3}".format(iestatus, snstatus, tfstatus, pjstatus),
-         description="_{0}, {1}, {2}, and {3}_".format(ielong, snlong, tflong, pjlong),
+         description="""
+         _{0}, {1}, {2}, and {3}_
+
+         **Percentages:**
+         {4}% Introverted, {5}%. Extroverted
+         {6}% Sensing, {7}% Intuitive
+         {8}% Thinking, {9}%, Feeling
+         {10}% Perceiving, {11}% Judging
+         """.format(ielong, snlong, tflong, pjlong, str(iperc3), str(eperc3), str(sperc3), str(nperc3), str(tperc3), str(fperc3), str(pperc3), str(jperc3)),
          color=discord.Colour.red()
      )
      embed.set_footer(text="Learn more about this type: https://www.16personalities.com/{0}{1}{2}{3}-personality".format(iestatus.lower(), snstatus.lower(), tfstatus.lower(), pjstatus.lower()))
