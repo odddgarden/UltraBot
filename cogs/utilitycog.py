@@ -105,6 +105,25 @@ class utilitycog(commands.Cog):
          embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
          await ctx.respond(embed=embed)
 
+    @group.command(name="channelinfo", description="Shows detailed info on a server channel.")
+    async def channelinfo(self, ctx, channel: discord.Option(discord.TextChannel, description="Channel to get info of")):
+        embed = discord.Embed(
+            title="Info on {0}".format(channel),
+            description="""
+            **Category:** {0}
+            **Created at:** {1}
+            **Guild:** {2}
+            **ID:** {3}
+            **NSFW?** {4}
+            **Slowmode:** {5}
+            **Type:** {6}
+            """.format(channel.category, channel.created_at, channel.guild, channel.id, channel.nsfw, channel.slowmode_delay, channel.type),
+            color=discord.Colour.red(),
+
+        )
+        embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+        await ctx.respond(embed=embed)
+
 
 
 
