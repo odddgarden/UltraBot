@@ -33,7 +33,7 @@ class utilitycog(commands.Cog):
     
     @group.command(name="gettime", description="Returns the current date and time.")
     async def gettime(self, ctx):
-        await ctx.respond(time.ctime)
+        await ctx.respond(time.ctime())
 
     @group.command(name="timestop", description="Stop time in a server JJBA style")
     @commands.has_permissions(manage_channels=True)
