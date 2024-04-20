@@ -124,6 +124,28 @@ class utilitycog(commands.Cog):
         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
         await ctx.respond(embed=embed)
 
+    @group.command(name="serverinfo", description="Provides detailed information on the given server.")
+    async def serverinfo(self, ctx, server: discord.Option(discord.Guild, description="Name of the server to get info on. Case sensitive!")):
+        embed = discord.Embed(
+            title="Info on {0}".format(server),
+            description="""
+            **Members:** {0}
+            **Owner:** {1} 
+            **ID:** {2} 
+            **Created at:** {3}
+            **Description:** {4} 
+            """.format(server.member_count, server.owner, server.id, server.created_at, server.description),
+            color=discord.Colour.og_blurple(),
+
+
+        )
+        embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+        embed.set_thumbnail(url=server.icon)
+
+        await ctx.respond(embed=embed)
+
+
+
 
 
 
