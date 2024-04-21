@@ -285,6 +285,109 @@ class Mbti(commands.Cog):
          pjstatus = "J"
          pjlong = "Judging"
 
+     funfact = "undefined"
+     if iestatus == "I" and snstatus == "N" and tfstatus == "T" and pjstatus == "J":
+         funfact = "INTJ is the most introverted type, and is great with coming up with plans!"
+         famoustype = "Christopher Nolan and Michelle Obama"
+         famousfiction = "Emperor Palpatine and Giorno Giovanna"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/intj-architect.png"
+
+     if iestatus == "E" and snstatus == "N" and tfstatus == "T" and pjstatus == "J":
+         funfact = "ENTJ is great with planning, and are most likely to be leaders."
+         famoustype = "Steve Jobs and Gordon Ramsey"
+         famousfiction = "Funny Valentine and Ultron"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/entj-commander.png"
+
+     if iestatus == "I" and snstatus == "N" and tfstatus == "T" and pjstatus == "P":
+         funfact = "INTP are the most intelligent type and are likely to be scientists!"
+         famoustype = "Einstein and Bill Gates"
+         famousfiction = "Yoda and L (from death note)"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/intp-logician.png"
+
+     if iestatus == "E" and snstatus == "N" and tfstatus == "T" and pjstatus == "P":
+         funfact = "ENTP is great at debating, and are likely to push their ideas very strongly!"
+         famoustype = "Weird Al and Adam Savage"
+         famousfiction = "Joker and Iron Man"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/entp-debater.png"
+
+     if iestatus == "I" and snstatus == "N" and tfstatus == "F" and pjstatus == "J":
+         funfact = "INFJ are the most intuitive type and are the most extroverted introverts! They tend to be very spiritual."
+         famoustype = "Lady Gaga and Martin Luther King"
+         famousfiction = "Enrico Pucci and Deku"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/infj-advocate.png"
+
+     if iestatus == "I" and snstatus == "N" and tfstatus == "F" and pjstatus == "P":
+         funfact = "INFP are the most popular type for fictional main characters!"
+         famoustype = "JRR Tolkien and Shakespeare"
+         famousfiction = "Luke Skywalker and Will Byers"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/infp-mediator.png"
+
+     if iestatus == "E" and snstatus == "N" and tfstatus == "F" and pjstatus == "J":
+         funfact = "ENFJ are very good and charismatic leaders!"
+         famoustype = "Obama and Oprah Winfrey"
+         famousfiction = "Mike Wheeler and Homelander"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/enfj-protagonist.png"
+         
+
+     if iestatus == "E" and snstatus == "N" and tfstatus == "F" and pjstatus == "P":
+         funfact = "ENFPs are great at spreading their passions, and are the most introverted extroverts!"
+         famoustype = "Robin Williams and Quentin Tarantino"
+         famousfiction = "Michael Scott and Joyce Byers"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/enfp-campaigner.png"
+
+     if iestatus == "I" and snstatus == "S" and tfstatus == "T" and pjstatus == "J":
+         funfact = "ISTJs are very funny, and are very reliable!"
+         famoustype = "Sting and Natalie Portman"
+         famousfiction = "Hermoine Granger and Sheldon Cooper"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/istj-logistician.png"
+
+     if iestatus == "I" and snstatus == "S" and tfstatus == "F" and pjstatus == "J":
+         funfact = "ISFJs are very loving and caring for their loved ones, and are very generous!"
+         famoustype = "Vin Diesel and Beyonce"
+         famousfiction = "Captain America and Marge Simpson"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/isfj-defender.png"
+        
+
+     if iestatus == "E" and snstatus == "S" and tfstatus == "T" and pjstatus == "J":
+         funfact = "ESTJs are great at managing others and care about making a difference!"
+         famoustype = "Judge Judy and Rockefeller"
+         famousfiction = "Franziska von Karma and Mr. Krabs"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/estj-executive.png"
+
+     if iestatus == "E" and snstatus == "S" and tfstatus == "F" and pjstatus == "J":
+         funfact = "ESFJs are very caring and eager to help!"
+         famoustype = "Taylor Swift and Steve Harvey"
+         famousfiction = "Dorothy Gale and Woody"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/esfj-consul.png"
+
+     if iestatus == "I" and snstatus == "S" and tfstatus == "T" and pjstatus == "P":
+         funfact = "ISTPs are creative builders who love a hands-on experience with anything!"
+         famoustype = "Harrison Ford and Michael Jordan"
+         famousfiction = "Jotaro Kujo and Indiana Jones"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/istp-virtuoso.png"
+
+     if iestatus == "I" and snstatus == "S" and tfstatus == "F" and pjstatus == "P":
+         funfact = "ISFPs are creative and expressive, and usually are artists!"
+         famoustype = "Kevin Costner and Jungkook"
+         famousfiction = "Jesse Pinkman and Eleven"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/isfp-adventurer.png"
+
+     if iestatus == "E" and snstatus == "S" and tfstatus == "T" and pjstatus == "P":
+         funfact = "ESTPs are the most extroverted type and are very adventerous!"
+         famoustype = "Ernest Hemingway and Eddie Murphy"
+         famousfiction = "Sonic the Hedgehog and Joseph Joestar"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/estp-entrepreneur.png"
+
+     if iestatus == "E" and snstatus == "S" and tfstatus == "F" and pjstatus == "P":
+         funfact = "ESFPs are the most energetic personality, and are the most emotional!"
+         famoustype = "Elton John and Adele"
+         famousfiction = "Homer Simpson and Peter Griffin"
+         icon = "https://www.16personalities.com/static/images/personality-types/avatars/esfp-entertainer.png"
+
+     
+
+     
+
      
 
 
@@ -303,20 +406,31 @@ class Mbti(commands.Cog):
          """.format(ielong, snlong, tflong, pjlong, str(iperc3), str(eperc3), str(sperc3), str(nperc3), str(tperc3), str(fperc3), str(pperc3), str(jperc3)),
          color=discord.Colour.red()
      )
+     embed.set_thumbnail(url=icon)
+     embed.add_field(name="Fun Fact about {0}{1}{2}{3}s:".format(iestatus, snstatus, tfstatus, pjstatus), value=funfact)
+     embed.add_field(name="Famous {0}{1}{2}{3}s:".format(iestatus, snstatus, tfstatus, pjstatus), value=famoustype)
+     embed.add_field(name="Famous Fictional {0}{1}{2}{3}s:".format(iestatus, snstatus, tfstatus, pjstatus), value=famousfiction)
      embed.set_footer(text="Learn more about this type: https://www.16personalities.com/{0}{1}{2}{3}-personality".format(iestatus.lower(), snstatus.lower(), tfstatus.lower(), pjstatus.lower()))
      await ctx.respond(embed=embed)
 
     @group.command(name="mostmbti", description="A command to find what the most (blank) MBTI is!")
     async def mostmbti(self, ctx, most1: discord.Option(str, description="The first option to find what the most (blank) (blank) MBTI is!", choices=["introverted", "extroverted", "intuitive", "sensing", "thinking", "feeling", "perceiving", "judging"]), most2: discord.Option(str, description="The second option to find what the most (blank) (blank) MBTI is!", choices=["introvert", "extrovert", "intuitive", "senser", "thinker", "feeler", "perceiver", "judger"])):
         mbti = "undefined"
-        if most1 == "introverted" and most2 == "introvert" or most1 == "introverted" and most2 == "judger" or most1 == "introverted" and most2 == "intuitive" or most1 == "introverted" and most2 == "thinker":
+        
+        if most1 == "introverted" and most2 == "introvert":
             mbti = "INTJ"
-
-        if most1 == "introverted" and most2 == "senser":
-            mbti = "ISTJ"
 
         if most1 == "introverted" and most2 == "extrovert":
             mbti = "ENFP"
+
+        if most1 == "introverted" and most2 == "intuitive":
+            mbti = "INTJ"
+
+        if most1 == "introverted" and most2 == "senser":
+            mbti = "ISTP"
+
+        if most1 == "introverted" and most2 == "thinker":
+            mbti = "INTJ"
 
         if most1 == "introverted" and most2 == "feeler":
             mbti = "INFP"
@@ -324,17 +438,176 @@ class Mbti(commands.Cog):
         if most1 == "introverted" and most2 == "perceiver":
             mbti = "INTP"
 
-        if most1 == "extroverted" and most2 == "extrovert" or most1 == "extroverted" and most2 == "sensor" or most1 == "extroverted" and most2 == "thinker" or most1 == "extroverted" and most2 == "perceiver":
+        if most1 == "introverted" and most2 == "judger":
+            mbti = "INTJ"
+
+        if most1 == "extroverted" and most2 == "introvert":
+            mbti = "INFJ"
+
+        if most1 == "extroverted" and most2 == "extrovert":
             mbti = "ESTP"
 
-        if most1 == "extroverted" and most2 == "intuitive" or most1 == "extroverted" and most2 == "judger":
+        if most1 == "extroverted" and most2 == "intuitive":
             mbti = "ENFJ"
+
+        if most1 == "extroverted" and most2 == "senser":
+            mbti = "ESTP"
+
+        if most1 == "extroverted" and most2 == "thinker":
+            mbti = "ESTP"
 
         if most1 == "extroverted" and most2 == "feeler":
             mbti = "ESFP"
 
-        if most1 == "intuitive" and most2 == "intuitive" or most1 == "introverted" and most2 == "":
+        if most1 == "extroverted" and most2 == "perceiver":
+            mbti = "ESTP"
+
+        if most1 == "extroverted" and most2 == "judger":
+            mbti = "ENFJ"
+
+        if most1 == "intuitive" and most2 == "introvert":
             mbti = "INFJ"
+
+        if most1 == "intuitive" and most2 == "extrovert":
+            mbti = "ENTP"
+
+        if most1 == "intuitive" and most2 == "intuitive":
+            mbti = "INFJ"
+
+        if most1 == "intuitive" and most2 == "senser":
+            mbti = "ISTP"
+
+        if most1 == "intuitive" and most2 == "thinker":
+            mbti = "INTP"
+
+        if most1 == "intuitive" and most2 == "feeler":
+            mbti = "INFJ"
+
+        if most1 == "intuitive" and most2 == "perceiver":
+            mbti = "INTP"
+
+        if most1 == "intuitive" and most2 == "judger":
+            mbti = "INFJ"
+
+        if most1 == "sensing" and most2 == "introvert":
+            mbti = "ISTJ"
+
+        if most1 == "sensing" and most2 == "extrovert":
+            mbti = "ESTP"
+
+        if most1 == "sensing" and most2 == "intuitive":
+            mbti = "ENTJ"
+
+        if most1 == "sensing" and most2 == "senser":
+            mbti = "ESTP"
+
+        if most1 == "sensing" and most2 == "thinker":
+            mbti = "ESTP"
+
+        if most1 == "sensing" and most2 == "feeler":
+            mbti = "ESFP"
+
+        if most1 == "sensing" and most2 == "perceiver":
+            mbti = "ESTP"
+
+        if most1 == "sensing" and most2 == "judger":
+            mbti = "ISTJ"
+
+        if most1 == "thinking" and most2 == "introvert":
+            mbti = "INTP"
+
+        if most1 == "thinking" and most2 == "extrovert":
+            mbti = "ENTJ"
+
+        if most1 == "thinking" and most2 == "intuitive":
+            mbti = "INTP"
+
+        if most1 == "thinking" and most2 == "senser":
+            mbti = "ISTJ"
+
+        if most1 == "thinking" and most2 == "thinker":
+            mbti = "INTP"
+
+        if most1 == "thinking" and most2 == "feeler":
+            mbti = "INFJ"
+
+        if most1 == "thinking" and most2 == "perceiver":
+            mbti = "INTP"
+
+        if most1 == "thinking" and most2 == "judger":
+            mbti = "INTJ"
+
+        if most1 == "feeling" and most2 == "introvert":
+            mbti = "ISFJ"
+
+        if most1 == "feeling" and most2 == "extrovert":
+            mbti = "ESFP"
+
+        if most1 == "feeling" and most2 == "intuitive":
+            mbti = "INFP"
+
+        if most1 == "feeling" and most2 == "senser":
+            mbti = "ESFP"
+
+        if most1 == "feeling" and most2 == "thinker":
+            mbti = "ESTP"
+
+        if most1 == "feeling" and most2 == "feeler":
+            mbti = "ESFP"
+
+        if most1 == "feeling" and most2 == "perceiver":
+            mbti = "ESFP"
+
+        if most1 == "feeling" and most2 == "judger":
+            mbti = "ENFJ"
+
+        if most1 == "perceiving" and most2 == "introvert":
+            mbti = "INTP"
+
+        if most1 == "perceiving" and most2 == "extrovert":
+            mbti = "ESFP"
+
+        if most1 == "perceiving" and most2 == "intuitive":
+            mbti = "INTP"
+
+        if most1 == "perceiving" and most2 == "senser":
+            mbti = "ESFP"
+
+        if most1 == "perceiving" and most2 == "thinker":
+            mbti = "INTP"
+
+        if most1 == "perceiving" and most2 == "feeler":
+            mbti = "ESFP"
+
+        if most1 == "perceiving" and most2 == "perceiver":
+            mbti = "ESFP"
+
+        if most1 == "perceiving" and most2 == "judger":
+            mbti = "ENFJ"
+
+        if most1 == "judging" and most2 == "introvert":
+            mbti = "INTJ"
+
+        if most1 == "judging" and most2 == "extrovert":
+            mbti = "ENTJ"
+
+        if most1 == "judging" and most2 == "intuitive":
+            mbti = "ENTJ"
+
+        if most1 == "judging" and most2 == "senser":
+            mbti = "ESTJ"
+
+        if most1 == "judging" and most2 == "perceiver":
+            mbti = "ISFP"
+
+        if most1 == "judging" and most2 == "judger":
+            mbti = "ENTJ"
+
+
+        
+
+
+        
 
         
 
@@ -352,7 +625,7 @@ class Mbti(commands.Cog):
 
 
 
-        
+    
      
 
 
