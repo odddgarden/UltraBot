@@ -597,6 +597,12 @@ class Mbti(commands.Cog):
         if most1 == "judging" and most2 == "senser":
             mbti = "ESTJ"
 
+        if most1 == "judging" and most2 == "thinker":
+            mbti = "INTJ"
+
+        if most1 == "judging" and most2 == "feeler":
+            mbti = "ESFJ"
+
         if most1 == "judging" and most2 == "perceiver":
             mbti = "ISFP"
 
