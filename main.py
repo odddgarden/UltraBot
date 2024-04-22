@@ -35,7 +35,7 @@ FRENCH = 420052952686919690
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=';', intents=intents)
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 #loading cogs
 bot.load_extension('cogs.moderation')
 bot.load_extension('cogs.fun')
@@ -79,6 +79,8 @@ async def on_application_command_error(interaction: discord.Interaction,
         await interaction.response.send_message(embed=embed, view=ProblemView())
     except:
         await interaction.followup.send(embed=embed, view=ProblemView())
+    raise error
+
 #UltraBot website button for /about
 class AboutLinkBloggerView(discord.ui.View):
     def __init__(self):
