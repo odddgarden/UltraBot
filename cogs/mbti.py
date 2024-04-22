@@ -406,12 +406,23 @@ class Mbti(commands.Cog):
          """.format(ielong, snlong, tflong, pjlong, str(iperc3), str(eperc3), str(sperc3), str(nperc3), str(tperc3), str(fperc3), str(pperc3), str(jperc3)),
          color=discord.Colour.red()
      )
+     _16p_url = "https://www.16personalities.com/{0}{1}{2}{3}-personality".format(iestatus.lower(), snstatus.lower(), tfstatus.lower(), pjstatus.lower())
      embed.set_thumbnail(url=icon)
      embed.add_field(name="Fun Fact about {0}{1}{2}{3}s:".format(iestatus, snstatus, tfstatus, pjstatus), value=funfact)
      embed.add_field(name="Famous {0}{1}{2}{3}s:".format(iestatus, snstatus, tfstatus, pjstatus), value=famoustype)
      embed.add_field(name="Famous Fictional {0}{1}{2}{3}s:".format(iestatus, snstatus, tfstatus, pjstatus), value=famousfiction)
-     embed.set_footer(text="Learn more about this type: https://www.16personalities.com/{0}{1}{2}{3}-personality".format(iestatus.lower(), snstatus.lower(), tfstatus.lower(), pjstatus.lower()))
-     await ctx.respond(embed=embed)
+     # embed.set_footer(text="Learn more about this type: ".format(iestatus.lower(), snstatus.lower(), tfstatus.lower(), pjstatus.lower()))
+     
+     # Make a discord.View object for buttons
+     view = discord.ui.View()
+     button = discord.ui.Button(
+         style = discord.ButtonStyle.link,
+         label = "Learn more about {0}!".format((iestatus + snstatus + tfstatus + pjstatus).upper()),
+         url = _16p_url
+     )
+     view.add_item(item=button)
+
+     await ctx.respond(embed=embed, view=view)
 
     @group.command(name="mostmbti", description="A command to find what the most (blank) MBTI is!")
     async def mostmbti(self, ctx, most1: discord.Option(str, description="The first option to find what the most (blank) (blank) MBTI is!", choices=["introverted", "extroverted", "intuitive", "sensing", "thinking", "feeling", "perceiving", "judging"]), most2: discord.Option(str, description="The second option to find what the most (blank) (blank) MBTI is!", choices=["introvert", "extrovert", "intuitive", "senser", "thinker", "feeler", "perceiver", "judger"])):
