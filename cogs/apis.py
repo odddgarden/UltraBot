@@ -74,6 +74,58 @@ class Apis(commands.Cog):
          embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
          embed.set_thumbnail(url="https://hips.hearstapps.com/hmg-prod/images/william-shakespeare-194895-1-402.jpg")
          await ctx.respond(embed=embed)
+
+
+    @group.command(name="jojostand", description="Get a random jojo stand and its info!")
+    async def jojostand(self, ctx):
+         id = random.randint(1, 155)
+         rstand = requests.get("https://stand-by-me.herokuapp.com/api/v1/stands/{0}".format(str(id)))
+         jstand = json.loads(rstand.text)
+
+         embed = discord.Embed(
+              title=jstand["name"],
+              description="""
+              **Alternate name:** {0}
+              **Japanese name:** {1}
+              **Chapter:** {2}
+              **Abilities:** {3}
+              **Battle Cry:** {4}
+
+               """.format(jstand["alternateName"], jstand["japaneseName"], jstand["chapter"], jstand["abilities"], jstand["battlecry"]),
+               color=discord.Colour.blurple()
+         )
+         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         embed.set_image(url="https://jojos-bizarre-api.netlify.app/assets/{0}".format(jstand["image"]))
+
+         await ctx.respond(embed=embed)
+
+
+    @group.command(name="jojocharacter", description="Get a random jojo character and their info!")
+    async def jojocharacter(self, ctx):
+         id = random.randint(1, 175)
+         rchar = requests.get("https://stand-by-me.herokuapp.com/api/v1/characters/{0}".format(str(id)))
+         jchar = json.loads(rchar.text)
+
+         embed = discord.Embed(
+              title=jchar["name"],
+              description="""
+              **Japanese name:** {0}
+              **Abilities:** {1}
+              **Nationality:** {2}
+              **Catchphrase:** {3}
+              **Family:** {4}
+              **Chapter:** {5}
+              **Still alive?** ||{6}||
+              **Is human?** {7}
+
+               """.format(jchar["japaneseName"], jchar["abilities"], jchar["nationality"], jchar["catchphrase"], jchar["family"], jchar["chapter"], jchar["living"], jchar["isHuman"]),
+               color=discord.Colour.blurple()
+         )
+         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         embed.set_image(url="https://jojos-bizarre-api.netlify.app/assets/{0}".format(jchar["image"]))
+
+         await ctx.respond(embed=embed)
+         
          
          
         
