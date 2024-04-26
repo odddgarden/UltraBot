@@ -21,7 +21,9 @@ class Calc(commands.Cog):
                   d10: discord.Option(int, description="How many times to roll the D10 dice", required=False, default=0),
                   d12: discord.Option(int, description="How many times to roll the D12 dice", required=False, default=0),
                   d20: discord.Option(int, description="How many times to roll the D20 dice", required=False, default=0),
+                  d100: discord.Option(int, description="How many times to roll the D100 dice", required=False, default=0),
                   extraadd: discord.Option(int, description="Any extra numbers to add", required=False, default=0),
+                  extraminus: discord.Option(int, description="Any extra numbers to subtract", required=False, default=0),
                   custommax: discord.Option(int, description="A custom maximum.", required=False, default=0),
                   custommin: discord.Option(int, description="A custom minimum. MUST be accompanied by a custom maximum!!!", required=False, default=0),
                   customamount: discord.Option(int, description="How many times to do the custom min/max", required=False, default=0)):
@@ -44,12 +46,16 @@ class Calc(commands.Cog):
         for _d20 in range(d20):
             total += random.randint(1, 20)
 
+        for _d20 in range(d100):
+            total += random.randint(1, 100)
+
        
 
         for _custom in range(customamount):
             total += random.randint(custommin, custommax)
 
         total += extraadd
+        total -= extraminus
 
         await ctx.respond(":game_die: " + str(total))
 
