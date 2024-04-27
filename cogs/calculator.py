@@ -76,7 +76,7 @@ class Calc(commands.Cog):
 
     @group.command(name="divide", description="Divides 2 numbers")
     async def divide(self, ctx, value1: discord.Option(int, description="The first number to divide", required=True), value2: discord.Option(int, description="The second number to divide", required=True)):
-        if value1 = 0 or value2 = 0:
+        if value1 == 0 or value2 == 0:
            await ctx.respond("You can't divide things by zero, smarty.")
         else:
           await ctx.respond(str(value1 / value2))
