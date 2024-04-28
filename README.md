@@ -23,6 +23,9 @@ UltraBot is a full open source discord bot made by me. It has plenty of slash co
 
 * Updated nearly every day with 40+ slash commands!
 
+## How do I add it to my server?
+Anyone can add UltraBot to their server on [UltraBot's webpage](https://combinesoldier14.blogspot.com/p/ultrabot-links-faq.html)!
+
 ## Credits
 **Credit to [AlphaGameDeveloper](https://github.com/AlphaGameDeveloper) for helping me out with some of the code.  His bot can be found [here](https://github.com/AlphaGameDeveloper/AlphaGameBot).**
 
