@@ -123,6 +123,19 @@ class Apis(commands.Cog):
          )
          embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
          embed.set_image(url="https://jojos-bizarre-api.netlify.app/assets/{0}".format(jchar["image"]))
+         
+    @group.command(name="meme", description="Get a random meme from Reddit!")
+    async def meme(self, ctx):
+         rmeme = requests.get("https://meme-api.com/gimme")
+         jmeme = json.loads(rmeme.text)
+         
+         embed = discord.Embed(
+              title = jmeme["title"],
+              description = "Upvote score: {0}".format(jmeme["ups"]),
+              color = discord.Colour.blurple(),
+         )
+         embed.set_image(url=jmeme["url"])
+         embed.set_footer(text="Posted in r/{0} by u/{1}".format(jmeme["subreddit"], jmeme["author"]))
 
          await ctx.respond(embed=embed)
          
