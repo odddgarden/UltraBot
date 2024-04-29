@@ -4,6 +4,9 @@ import os
 from discord import reaction
 from discord import Reaction
 
+with open("version.json", "r") as f:
+            _r = json.load(f)
+            VERSION = _r["VERSION"]
 
 
 class role(commands.Cog):
