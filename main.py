@@ -14,6 +14,17 @@ from discord import InteractionMessage
 import nltk
 import random
 
+#The Dev status is meant for if UltraBot is running in DEV mode which changes some names and icons.
+dev_status = false
+
+if dev_status = true:
+            name = "UltraBot Development Edition"
+            game = "with unstable ass commands"
+
+if dev_status = false:
+            name = "UltraBot"
+            game = "in the Python CMD"
+
 
 nltk.download('words')
 
@@ -50,7 +61,7 @@ bot.load_extension('cogs.mcstatus')
 
 @bot.event
 async def on_ready():
-    status = discord.Game("in the Python CMD")
+    status = discord.Game(game)
     await bot.change_presence(activity=status)
     bot.auto_sync_commands = True
     logging.info("Bot is ready!")
@@ -120,8 +131,8 @@ async def helloworld(ctx):
 @bot.slash_command(name="about", description="About the bot")
 async def about(ctx):
     embed = discord.Embed(
-        title= "About UltraBot v" + VERSION,
-        description= "UltraBot is a Python based discord bot created by CombineSoldier14 with commands for moderation and fun!\n UltraBot's birthday is **4/5/2024.**",
+        title= "About " + name + "v" + VERSION,
+        description= "{0} is a Python based discord bot created by CombineSoldier14 with commands for moderation and fun!\n UltraBot's birthday is **4/5/2024.**".format(name),
         color=discord.Colour.yellow(),
     )
     embed.set_thumbnail(url="https://camo.githubusercontent.com/7ebe7e305bde0efefd93829ed13a016cbfcad30985449dd5d54f612174aceb44/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6170702d69636f6e732f313232353232303736343836313733303836372f66363662643462656234663165626565303638356438633563666436343662622e706e673f73697a653d323536")
