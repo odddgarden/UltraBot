@@ -14,7 +14,6 @@ nltk.download('words')
 word_list = ["Heads", "Tails"]
 eightball_list = ["It is certain.", "It is decidedly so", "Without a doubt", "Yes - definitely", "You may rely on it", "As I see it, yes.", "Most likely.", "Outlook good.", "Yes.", "Signs point to yes.", "Reply hazy, try again", "Ask again later", "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again.", "Don't count on it", "My reply is no.", "My sources say no.", "Outlook not so good.", "Very doubtful."]
 random_word = random.choice(word_list)
-random_8ball = random.choice(eightball_list)
 
 with open("version.json", "r") as f:
             _r = json.load(f)
@@ -39,13 +38,13 @@ class Fun(commands.Cog):
     
     @group.command(name="coinflip", description="Flip a coin!")
     async def coinflip(self, ctx):
-        await ctx.respond(":coin: **" + random_word + "**")
+        await ctx.respond(":coin: **" + random.choice(word_list) + "**")
 
     @group.command(name="8ball", description="The Magic 8 Ball answers your question!")
     async def _8ball(self, ctx, text=discord.Option(str, description="Question to ask the 8 ball")):
         embed = discord.Embed(
             title="Magic 8 Ball: " + text,
-            description=random_8ball,
+            description=random.choice(eightball_list),
             color=discord.Colour.darker_gray(),
             
         )
