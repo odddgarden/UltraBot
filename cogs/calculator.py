@@ -57,7 +57,10 @@ class Calc(commands.Cog):
         total += extraadd
         total -= extraminus
 
-        await ctx.respond(":game_die: " + str(total))
+        if total > 1000:
+            await ctx.respond("Your number is too high!")
+        else:
+            await ctx.respond(":game_die: " + str(total))
 
 
         
