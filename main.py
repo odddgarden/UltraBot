@@ -14,16 +14,6 @@ from discord import InteractionMessage
 import nltk
 import random
 
-#The Dev status is meant for if UltraBot is running in DEV mode which changes some names and icons.
-dev_status = false
-
-if dev_status = true:
-            name = "UltraBot Development Edition"
-            game = "with unstable ass commands"
-
-if dev_status = false:
-            name = "UltraBot"
-            game = "in the Python CMD"
 
 
 nltk.download('words')
@@ -35,6 +25,24 @@ with open("version.json", "r") as f:
 with open("latestaddition.json", "r") as f:
             _r = json.load(f)
             LATESTADDITION = _r["LATEST_ADDITION"]
+
+with open("dev.json", "r") as f:
+            _r = json.load(f)
+            dev_status = _r["DEV_STATUS"]
+
+
+#The Dev status is meant for if UltraBot is running in DEV mode which changes some names and icons.
+
+if dev_status == "true":
+            name = "UltraBot Development Edition"
+            game = "with unstable ass commands"
+            icon = "https://cdn.discordapp.com/avatars/1227477531461025854/85f59950e14cca56e4b1bcefd911ca23.png?size=1024"
+
+if dev_status == "false":
+            name = "UltraBot"
+            game = "in the Python CMD"
+            icon = "https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256"
+
 
 
 
@@ -131,11 +139,11 @@ async def helloworld(ctx):
 @bot.slash_command(name="about", description="About the bot")
 async def about(ctx):
     embed = discord.Embed(
-        title= "About " + name + "v" + VERSION,
+        title= "About " + name + " v" + VERSION,
         description= "{0} is a Python based discord bot created by CombineSoldier14 with commands for moderation and fun!\n UltraBot's birthday is **4/5/2024.**".format(name),
         color=discord.Colour.yellow(),
     )
-    embed.set_thumbnail(url="https://camo.githubusercontent.com/7ebe7e305bde0efefd93829ed13a016cbfcad30985449dd5d54f612174aceb44/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6170702d69636f6e732f313232353232303736343836313733303836372f66363662643462656234663165626565303638356438633563666436343662622e706e673f73697a653d323536")
+    embed.set_thumbnail(url=icon)
     embed.add_field(name="**Latest Addition**", value=LATESTADDITION)
     await ctx.respond(embed=embed, view=AboutLinkBloggerView())
 
