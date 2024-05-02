@@ -68,6 +68,17 @@ class Fun(commands.Cog):
         embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
         await ctx.respond(embed=embed)
 
+   @group.command(name="randomyt", description="Get a random youtube video")
+    async def randomyt(self, ctx):
+         
+         listvalues = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+         videoid = ""
+         for _ in range(11): # video id is 11 chars long
+            videoid = videoid + random.choice(listvalues)
+         
+         await ctx.respond("https://www.youtube.com/watch?v={}".format(videoid))
+         await ctx.send("NOTE: Not all generated videos may exist.")
+
 def setup(bot): # this is called by Pycord to setup the cog
     bot.add_cog(Fun(bot)) # add the cog to the bot
 
