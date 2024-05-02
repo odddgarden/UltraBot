@@ -154,7 +154,12 @@ class Apis(commands.Cog):
          embed.set_footer(text="Posted in r/{0} by u/{1}".format(jmeme["subreddit"], jmeme["author"]))
 
          await ctx.respond(embed=embed)
-         
+
+   @group.command(name="randombreed", description="Get a random dog breed!")
+   async def randombreeed(self, ctx):
+               rbreed = requests.get("https://dog.ceo/api/breeds/list/all")
+               jbreed = json.loads(rbreed.text)
+               await ctx.respond(":dog: `{0}`".format(random.choice(jbreed)))
     
          
          
