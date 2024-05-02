@@ -14,7 +14,23 @@ with open("version.json", "r") as f:
             _r = json.load(f)
             VERSION = _r["VERSION"]
 
+with open("dev.json", "r") as f:
+            _r = json.load(f)
+            dev_status = _r["DEV_STATUS"]
 
+
+#The Dev status is meant for if UltraBot is running in DEV mode which changes some names and icons.
+
+
+if dev_status == "true":
+            name = "UltraBot Development Edition"
+            game = "with unstable ass commands"
+            icon = "https://cdn.discordapp.com/avatars/1227477531461025854/85f59950e14cca56e4b1bcefd911ca23.png?size=1024"
+
+if dev_status == "false":
+            name = "UltraBot"
+            game = "in the Python CMD"
+            icon = "https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256"
 
 
 
@@ -58,7 +74,7 @@ class Apis(commands.Cog):
             color=discord.Colour.blurple(),
         )
         embed.set_image(url=dogjson["message"])
-        embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+        embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
         await ctx.respond(embed=embed)
     
     @group.command(name="shakespeare", description="Translate english text to Shakespeare english!")
@@ -71,7 +87,7 @@ class Apis(commands.Cog):
               description = jshake["contents"]["text"],
               color = discord.Colour.orange(),
          )
-         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
          embed.set_thumbnail(url="https://hips.hearstapps.com/hmg-prod/images/william-shakespeare-194895-1-402.jpg")
          await ctx.respond(embed=embed)
 
@@ -94,7 +110,7 @@ class Apis(commands.Cog):
                """.format(jstand["alternateName"], jstand["japaneseName"], jstand["chapter"], jstand["abilities"], jstand["battlecry"]),
                color=discord.Colour.blurple()
          )
-         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
          embed.set_image(url="https://jojos-bizarre-api.netlify.app/assets/{0}".format(jstand["image"]))
 
          await ctx.respond(embed=embed)
@@ -121,7 +137,7 @@ class Apis(commands.Cog):
                """.format(jchar["japaneseName"], jchar["abilities"], jchar["nationality"], jchar["catchphrase"], jchar["family"], jchar["chapter"], jchar["living"], jchar["isHuman"]),
                color=discord.Colour.blurple()
          )
-         embed.set_footer(text="UltraBot " + VERSION, icon_url="https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256")
+         embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
          embed.set_image(url="https://jojos-bizarre-api.netlify.app/assets/{0}".format(jchar["image"]))
          
     @group.command(name="meme", description="Get a random meme from Reddit!")
