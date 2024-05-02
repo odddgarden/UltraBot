@@ -1,6 +1,29 @@
 import discord
 from discord.ext import commands
 import os
+import json
+
+with open("version.json", "r") as f:
+            _r = json.load(f)
+            VERSION = _r["VERSION"]
+
+
+with open("dev.json", "r") as f:
+            _r = json.load(f)
+            dev_status = _r["DEV_STATUS"]
+
+
+#The Dev status is meant for if UltraBot is running in DEV mode which changes some names and icons.
+
+if dev_status == "true":
+            name = "UltraBot Development Edition"
+            game = "with unstable ass commands"
+            icon = "https://cdn.discordapp.com/avatars/1227477531461025854/85f59950e14cca56e4b1bcefd911ca23.png?size=1024"
+
+if dev_status == "false":
+            name = "UltraBot"
+            game = "in the Python CMD"
+            icon = "https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256"
 
 
 
@@ -411,6 +434,7 @@ class Mbti(commands.Cog):
      embed.add_field(name="Fun Fact about {0}{1}{2}{3}s:".format(iestatus, snstatus, tfstatus, pjstatus), value=funfact)
      embed.add_field(name="Famous {0}{1}{2}{3}s:".format(iestatus, snstatus, tfstatus, pjstatus), value=famoustype)
      embed.add_field(name="Famous Fictional {0}{1}{2}{3}s:".format(iestatus, snstatus, tfstatus, pjstatus), value=famousfiction)
+     embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
      # embed.set_footer(text="Learn more about this type: ".format(iestatus.lower(), snstatus.lower(), tfstatus.lower(), pjstatus.lower()))
      
      # Make a discord.View object for buttons
