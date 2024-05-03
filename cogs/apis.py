@@ -118,6 +118,7 @@ class Apis(commands.Cog):
 
     @group.command(name="jojocharacter", description="Get a random jojo character and their info!")
     async def jojocharacter(self, ctx):
+         ctx.defer()
          id = random.randint(1, 175)
          rchar = requests.get("https://stand-by-me.herokuapp.com/api/v1/characters/{0}".format(str(id)))
          jchar = json.loads(rchar.text)
