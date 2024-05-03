@@ -110,6 +110,9 @@ class AboutLinkBloggerView(discord.ui.View):
 
      supportServerButton = discord.ui.Button(label='GitHub', style=discord.ButtonStyle.gray, url='https://github.com/CombineSoldier14/UltraBot.py')
      self.add_item(supportServerButton)
+
+     supportServerButton = discord.ui.Button(label='Add {0}!'.format(name), style=discord.ButtonStyle.gray, url='https://discord.com/oauth2/authorize?client_id=1225220764861730867')
+     self.add_item(supportServerButton)
     
 class InviteView(discord.ui.View):
    def __init__(self):
@@ -119,14 +122,15 @@ class InviteView(discord.ui.View):
       self.add_item(supportServerButton)
 
 
-
 #This file main.py can be seen as a cog itself. Only basic commands are here!
+
+
 
 
 
 @bot.slash_command(name="ping", description="Sends the bot's ping or latency")
 async def ping(ctx):
-    await ctx.respond(f"Pong! Latency or ping is {bot.latency}")
+    await ctx.respond("Pong! Latency or ping is {0}".format(round(bot.latency, 2)))
 
 @bot.slash_command(name="helloworld", description="If your program can't say this, don't talk to me")
 async def helloworld(ctx):
@@ -145,6 +149,7 @@ async def about(ctx):
     )
     embed.set_thumbnail(url=icon)
     embed.add_field(name="**Latest Addition**", value=LATESTADDITION)
+    embed.add_field(name="**Bot Ping**", value="{0} ms".format(round(bot.latency, 2)))
     await ctx.respond(embed=embed, view=AboutLinkBloggerView())
 
 
@@ -189,5 +194,6 @@ if __name__ == "__main__": # import run prevention
         raise EnvironmentError("No token specified!  Please enter a token via token.json or by passing an environment variable called 'BOT_TOKEN'.  Stop.")
     BOT_TOKEN = (environToken if environToken != None else loadedJSONToken)    
     bot.run(BOT_TOKEN)
+
 
 
