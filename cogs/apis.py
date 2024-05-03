@@ -139,6 +139,7 @@ class Apis(commands.Cog):
          )
          embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
          embed.set_image(url="https://jojos-bizarre-api.netlify.app/assets/{0}".format(jchar["image"]))
+         await ctx.respond(embed=embed)
          
     @group.command(name="meme", description="Get a random meme from Reddit!")
     async def meme(self, ctx):
