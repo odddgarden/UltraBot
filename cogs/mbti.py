@@ -445,7 +445,8 @@ class Mbti(commands.Cog):
          url = _16p_url
      )
      view.add_item(item=button)
-
+                                   
+     await ctx.defer()
      await ctx.respond(embed=embed, view=view)
 
     @group.command(name="mostmbti", description="A command to find what the most (blank) MBTI is!")
