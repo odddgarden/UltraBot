@@ -162,6 +162,18 @@ class utilitycog(commands.Cog):
 
         await ctx.respond(embed=embed)
 
+    @group.command(name="button", description="Make a embed link button!")
+    async def button(self, ctx, link: discord.Option(str, description="Link for the button. Must begin with http(s)://"), label: discord.Option(str, description="Label for button")):
+         class ButtonView(discord.ui.View):
+           def __init__(self):
+              super().__init__(timeout=None)
+
+              supportServerButton = discord.ui.Button(label=label, style=discord.ButtonStyle.gray, url=link)
+              self.add_item(supportServerButton)
+
+         await ctx.respond(view=ButtonView())
+      
+
 
 
 
