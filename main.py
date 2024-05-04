@@ -40,7 +40,7 @@ if dev_status == "true":
 
 if dev_status == "false":
             name = "UltraBot"
-            game = "in the Python CMD"
+            game = "Ace Attorney: Trials and Tribulations"
             icon = "https://cdn.discordapp.com/app-icons/1225220764861730867/f66bd4beb4f1ebee0685d8c5cfd646bb.png?size=256"
 
 
