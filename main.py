@@ -158,7 +158,7 @@ async def about(ctx):
 @bot.command(name="say")
 async def _say(ctx, *, args):
     if ctx.author.id == FRENCH:
-        await ctx.send(":middle_finger: I don't take orders from French people, bozo!!!")
+        await ctx.send(":middle_finger: > \"You can go fuck yourself with that!\" - Brewstew")
         await ctx.message.delete()
     else:
       await ctx.send(args)
