@@ -135,7 +135,14 @@ class Apis(commands.Cog):
               **Still alive?** ||{6}||
               **Is human?** {7}
 
-               """.format(jchar["japaneseName"], jchar["abilities"], jchar["nationality"], jchar["catchphrase"], jchar["family"], jchar["chapter"], jchar["living"], jchar["isHuman"]),
+               """.format(jchar["japaneseName"], 
+                          jchar["abilities"], 
+                          jchar["nationality"], 
+                          jchar["catchphrase"], 
+                          jchar["family"], 
+                          jchar["chapter"], 
+                          ("yes" if jchar["living"] else "no"),
+                          jchar["isHuman"]),
                color=discord.Colour.blurple()
          )
          embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
