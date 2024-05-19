@@ -174,7 +174,7 @@ class Apis(commands.Cog):
                await ctx.respond(f":dog: `{randbreed}`")
 
     @group.command(name="urlshort", description="Shortens a given URL")
-    async def urlshort(self, ctx, url: discord.Option(str, description="URL to shorten. Must begin with http(s)://")):
+    async def urlshort(self, ctx, url: discord.Option(str, description="URL to shorten. Must begin with http(s)://www.")):
            
            rurl = requests.post("https://csclub.uwaterloo.ca/~phthakka/1pt-express/addURL", params={"long": url})
            jurl = json.loads(rurl.text)
