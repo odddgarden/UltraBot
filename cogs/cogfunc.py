@@ -160,7 +160,7 @@ class Cogfunc(commands.Cog):
                     Si Score _(Introverted Sensing)_: **{6}**
                     Se Score _(Extroverted Sensing)_: **{7}**
 
-                    _To create your function stack, take your top two functions (They cannot be opposites, so no Ti-Fe. If your second function is the opposite of your highest, then just choose your third highest) and put them in a dashed line like this:_
+                    _To create your function stack, take your top two functions (They cannot be opposites, so no Ti-Fe. If your second function is the opposite of your highest, then just choose your third highest. It also must go introvert-extrovert or vice versa. They also cannot be the same type of function, so no Ti-Te.) and put them in a dashed line like this:_
 
                     `topfunction-secondfunction`
 
@@ -181,6 +181,80 @@ class Cogfunc(commands.Cog):
             embed.set_footer(text="The higher the number, the more of that function you have.")
 
             await ctx.respond(embed=embed)
+
+    @group.command(title="mbtifinder", description="Tells you an MBTI via specified dominant/secondary functions.")
+    async def mbtifinder(self, ctx, dom: discord.Option(str, description="Dominant function", choices=["Ti", "Te", "Fi", "Fe", "Si", "Se", "Ni", "Ne"]), sec: discord.Option(str, description="Secondary function", choices=["Ti", "Te", "Fi", "Fe", "Si", "Se", "Ni", "Ne"])):
+            if dom == "Ti" and sec == "Se":
+                    mbti = "ISTP"
+                    stack = "Ti-Se-Ni-Fe"
+
+            elif dom == "Ti" and sec == "Ne":
+                    mbti = "INTP"
+                    stack = "Ti-Ne-Si-Fe"
+
+            elif dom == "Te" and sec == "Si":
+                    mbti = "ESTJ"
+                    stack = "Te-Si-Ne-Fi"
+
+            elif dom == "Te" and sec == "Ni":
+                    mbti = "ENTJ"
+                    stack = "Te-Ni-Se-Fi"
+
+            elif dom == "Fi" and sec == "Se":
+                    mbti = "ISFP"
+                    stack = "Fi-Se-Ni-Te"
+
+            elif dom == "Fi" and sec == "Ne":
+                    mbti = "INFP"
+                    stack = "Fi-Ne-Si-Te"
+
+            elif dom == "Fe" and sec == "Si":
+                    mbti = "ESFJ"
+                    stack = "Fe-Si-Ne-Ti"
+
+            elif dom == "Fe" and sec == "Ni":
+                    mbti = "ENFJ"
+                    stack = "Fe-Ni-Se-Ti"
+
+            elif dom == "Si" and sec == "Te":
+                    mbti = "ISTJ"
+                    stack = "Si-Te-Fi-Ne"
+
+            elif dom == "Si" and sec == "Fe":
+                    mbti = "ISFJ"
+                    stack = "Si-Fe-Ti-Ne"
+
+            elif dom == "Se" and sec == "Ti":
+                    mbti = "ESTP"
+                    stack = "Se-Ti-Fe-Ni"
+
+            elif dom == "Se" and sec == "Fi":
+                    mbti = "ESFP"
+                    stack = "Se-Fi-Te-Ni"
+
+            elif dom == "Ni" and sec == "Te":
+                    mbti = "INTJ"
+                    stack = "Ni-Te-Fi-Se"
+
+            elif dom == "Ni" and sec == "Fe":
+                    mbti = "INFJ"
+                    stack = "Ni-Fe-Ti-Se"
+
+            elif dom == "Ne" and sec == "Ti":
+                    mbti = "ENTP"
+                    stack = "Ne-Ti-Fe-Si"
+
+            elif dom == "Ne" and sec == "Fi":
+                    mbti = "ENFP"
+                    stack = "Ne-Fi-Te-Si"
+
+            else:
+                    await ctx.respond(":x: That function pair is invalid. Remember, they cannot be the same type (so no Ti-Te), they cannot be opposites (so no Ti-Fe), and they must be introvert-extrovert or vice versa.")
+                    StopAsyncIteration
+
+            await ctx.respond("The functions **{0}**-**{1}** belong to **{2}**. The full stack is **{3}**.".format(dom, sec, mbti, stack))
+                
+                    
             
 
 
