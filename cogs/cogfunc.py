@@ -250,7 +250,7 @@ class Cogfunc(commands.Cog):
 
             else:
                     await ctx.respond(":x: That function pair is invalid. Remember, they cannot be the same type (so no Ti-Te), they cannot be opposites (so no Ti-Fe), and they must be introvert-extrovert or vice versa.")
-                    StopAsyncIteration
+                    return
 
             await ctx.respond("The functions **{0}**-**{1}** belong to **{2}**. The full stack is **{3}**.".format(dom, sec, mbti, stack))
                 
