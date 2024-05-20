@@ -179,6 +179,18 @@ class Apis(commands.Cog):
            rurl = requests.post("https://csclub.uwaterloo.ca/~phthakka/1pt-express/addURL", params={"long": url})
            jurl = json.loads(rurl.text)
            await ctx.respond("Your Shortened URL: https://1pt.co/{0}".format(jurl["short"]))
+
+    @group.command(name="weather", description="Get the weather for a city!")
+    async def weather(self, ctx, city: discord.Option(str, description="The city to get weather of")):
+           request = requests.get("https://goweather.herokuapp.com/weather/{0}".format(city))
+           response = json.loads(request.text)
+           if request.status_code == 404:
+                  await ctx.respond(":x: City not found! Maybe you misspelt it?")
+           else:
+             await ctx.respond("**{0}** is {1}, {2}. Wind will be up to {3}".format(city.upper(), response['temperature'], response['description'], response['wind']))
+   
+           
+        
     
          
          
