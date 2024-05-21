@@ -97,19 +97,28 @@ class Calc(commands.Cog):
     @group.command(name="add", description="Adds 2 numbers together")
     async def add(self, ctx, value1: discord.Option(float, description="The first number to add", required=True), value2: discord.Option(float, description="The second number to add", required=True)):
         
-        await ctx.respond("**{0}** + **{1}** = **{3}**".format(str(value1), str(value2), str(value1 + value2)))
+        await ctx.respond("**{0}** + **{1}** = **{2}**".format(str(value1), str(value2), str(value1 + value2)))
 
     @group.command(name="multiply", description="Multiplies 2 numbers together")
-    async def multiply(self, ctx, value1: discord.Option(int, description="The first number to multiply", required=True), value2: discord.Option(int, description="The second number to multiply", required=True)):
-        await ctx.respond(str(value1 * value2))
+    async def multiply(self, ctx, value1: discord.Option(float, description="The first number to multiply", required=True), value2: discord.Option(float, description="The second number to multiply", required=True)):
+        await ctx.respond("**{0}** x **{1}** = **{2}**".format(str(value1), str(value2), str(value1 * value2)))
 
     @group.command(name="divide", description="Divides 2 numbers")
-    async def divide(self, ctx, value1: discord.Option(int, description="The first number to divide", required=True), value2: discord.Option(int, description="The second number to divide", required=True)):
+    async def divide(self, ctx, value1: discord.Option(float, description="The first number to divide", required=True), value2: discord.Option(float, description="The second number to divide", required=True)):
         if value1 == 0 or value2 == 0:
            await ctx.respond("You can't divide things by zero, smarty.")
         else:
-          await ctx.respond(str(value1 / value2))
+          await ctx.respond("**{0}** / **{1}** = **{2}**".format(str(value1), str(value2), str(value1 / value2)))
 
+    @group.command(name="minus", description="Subtract a mumber")
+    async def minus(self, ctx, value1: discord.Option(float, description="The first number to subtract", required=True), value2: discord.Option(float, description="The second number to subtract", required=True)):
+         await ctx.respond("**{0}** - **{1}** = **{2}**".format(str(value1), str(value2), str(value1 - value2)))
+
+    @group.command(name="exponent", description="Get the exponent of a number!")
+    async def exponent(self, ctx, value: discord.Option(float, description="Number to power"), power: discord.Option(float, description="Power to set number to")):
+         await ctx.respond("**{0}** to the power of **{1}** is **{2}**".format(str(value), str(power), str(value**power)))
+         
+    
     
 
 
