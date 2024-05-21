@@ -8,6 +8,7 @@ from discord import PermissionOverwrite
 import requests
 import json
 import random
+import cogs.requestHandler as handler
 from random import uniform
 
 with open("version.json", "r") as f:
@@ -43,13 +44,13 @@ class Apis(commands.Cog):
         self._last_member = None
     @group.command(name="dadjoke", description="Get a random dad joke!")
     async def dadjoke(self, ctx):
-        r = requests.get("https://official-joke-api.appspot.com/random_joke")
+        r = handler.get("https://official-joke-api.appspot.com/random_joke")
         j = json.loads(r.text)
         await ctx.respond("{0} {1}".format(j["setup"], j["punchline"]))
     
     @group.command(name="xkcd", description="Get a random XKCD comic!")
     async def xkcd(self, ctx):
-        xkcdlink = requests.get("https://xkcd.com/" + str(random.randint(1, 2916)) + "/info.0.json")
+        xkcdlink = handler.get("https://xkcd.com/" + str(random.randint(1, 2916)) + "/info.0.json")
         xkcdjson = json.loads(xkcdlink.text)
             
         embed = discord.Embed(
@@ -67,7 +68,7 @@ class Apis(commands.Cog):
     
     @group.command(name="dogpics", description="Random picture of a dog!")
     async def dogpics(self, ctx):
-        doglink = requests.get("https://dog.ceo/api/breeds/image/random")
+        doglink = handler.get("https://dog.ceo/api/breeds/image/random")
         dogjson = json.loads(doglink.text)
 
         embed = discord.Embed(
@@ -80,7 +81,7 @@ class Apis(commands.Cog):
     
     @group.command(name="shakespeare", description="Translate english text to Shakespeare english!")
     async def shakespeare(self, ctx, text: discord.Option(str, description="Text to translate", required=True)):
-         rshake = requests.get("https://api.funtranslations.com/translate/shakespeare.json?text={0}".format(text))
+         rshake = handler.get("https://api.funtranslations.com/translate/shakespeare.json?text={0}".format(text))
          jshake = json.loads(rshake.text)
 
          embed = discord.Embed(
@@ -96,7 +97,7 @@ class Apis(commands.Cog):
     @group.command(name="jojostand", description="Get a random jojo stand and its info!")
     async def jojostand(self, ctx):
          id = random.randint(1, 155)
-         rstand = requests.get("https://stand-by-me.herokuapp.com/api/v1/stands/{0}".format(str(id)))
+         rstand = handler.get("https://stand-by-me.herokuapp.com/api/v1/stands/{0}".format(str(id)))
          jstand = json.loads(rstand.text)
 
          embed = discord.Embed(
@@ -121,7 +122,7 @@ class Apis(commands.Cog):
     async def jojocharacter(self, ctx):
          ctx.defer()
          id = random.randint(1, 175)
-         rchar = requests.get("https://stand-by-me.herokuapp.com/api/v1/characters/{0}".format(str(id)))
+         rchar = handler.get("https://stand-by-me.herokuapp.com/api/v1/characters/{0}".format(str(id)))
          jchar = json.loads(rchar.text)
 
          embed = discord.Embed(
@@ -152,7 +153,7 @@ class Apis(commands.Cog):
          
     @group.command(name="meme", description="Get a random meme from Reddit!")
     async def meme(self, ctx):
-         rmeme = requests.get("https://meme-api.com/gimme")
+         rmeme = handler.get("https://meme-api.com/gimme")
          jmeme = json.loads(rmeme.text)
          
          embed = discord.Embed(
@@ -167,7 +168,7 @@ class Apis(commands.Cog):
 
     @group.command(name="randombreed", description="Get a random dog breed!")
     async def randombreeed(self, ctx):
-               rbreed = requests.get("https://dog.ceo/api/breeds/list/all")
+               rbreed = handler.get("https://dog.ceo/api/breeds/list/all")
                breeds = list(json.loads(rbreed.text)["message"].keys())
                randbreed = random.choice(breeds)
                
