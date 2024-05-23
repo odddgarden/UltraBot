@@ -189,6 +189,20 @@ class Apis(commands.Cog):
                   await ctx.respond(":x: City not found! Maybe you misspelt it?")
            else:
              await ctx.respond("**{0}** is {1}, {2}. Wind will be up to {3}".format(city.upper(), response['temperature'], response['description'], response['wind']))
+
+    @group.command(name="httpdog", description="Get a dog image for an HTTP status code!")
+    async def httpdog(self, ctx, status: discord.Option(str, description="The HTTP status code to get image of.")):
+           rurl = requests.get("https://http.dog/{0}.jpg".format(status))
+           if rurl.status_code == 404:
+                  await ctx.respond(":x: Dog not found! That status code does not exist.")
+                  return
+    
+           embed = discord.Embed(
+                  title="Dog {0}".format(status),
+                  color=discord.Colour.blurple(),
+           )
+           embed.set_image(url="https://http.dog/{0}.jpg".format(status))
+           await ctx.respond(embed=embed)
    
            
         
