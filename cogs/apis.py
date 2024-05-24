@@ -145,7 +145,7 @@ class Apis(commands.Cog):
                           jchar["chapter"], 
                           ("yes" if jchar["living"] else "no"),
                           jchar["isHuman"]),
-               color=discord.Colour.blurple()
+               color=discord.Colour.blurple(),
          )
          embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
          embed.set_image(url="https://jojos-bizarre-api.netlify.app/assets/{0}".format(jchar["image"]))
@@ -183,12 +183,21 @@ class Apis(commands.Cog):
 
     @group.command(name="weather", description="Get the weather for a city!")
     async def weather(self, ctx, city: discord.Option(str, description="The city to get weather of")):
-           request = requests.get("https://goweather.herokuapp.com/weather/{0}".format(city))
-           response = json.loads(request.text)
-           if request.status_code == 404:
+        request = requests.get("https://goweather.herokuapp.com/weather/{0}".format(city))
+        response = json.loads(request.text)
+        if request.status_code == 404:
                   await ctx.respond(":x: City not found! Maybe you misspelt it?")
-           else:
-             await ctx.respond("**{0}** is {1}, {2}. Wind will be up to {3}".format(city.upper(), response['temperature'], response['description'], response['wind']))
+                  return
+        embed = discord.Embed(
+               title = "Weather in {0}".format(city.upper()),
+        )
+        embed.add_field(name="Today", value="Temperature is {0}, wind is up to {1} and it's {2}.".format(response["temperature"], response["wind"], response["description"]))
+
+        for day in response["forecast"]:
+               embed.add_field(name="Day {}".format(day["day"]), value="Temperture is {0} and wind is up to {1}.".format(day["temperature"], day["wind"]))
+
+        await ctx.respond(embed=embed)
+           
 
     @group.command(name="httpdog", description="Get a dog image for an HTTP status code!")
     async def httpdog(self, ctx, status: discord.Option(str, description="The HTTP status code to get image of.")):
@@ -203,6 +212,43 @@ class Apis(commands.Cog):
            )
            embed.set_image(url="https://http.dog/{0}.jpg".format(status))
            await ctx.respond(embed=embed)
+
+    @group.command(name="pokedex", description="Get info on a pokemon!")
+    async def pokedex(self, ctx, pokemon: discord.Option(str, description="Pokemon to get data of")):
+           request = requests.get("https://pokeapi.co/api/v2/pokemon/{0}".format(pokemon.lower()))
+           
+           if request.status_code == 404:
+                  await ctx.respond(":x: Pokemon not found! Maybe you misspelled it?")
+                  return
+           
+           response = json.loads(request.text)
+
+           abilities = ""
+
+           for ability in response["abilities"]:
+                  abilities = abilities + "{}, ".format(ability["ability"]["name"])
+
+           embed = discord.Embed(
+                  title="Info on {0}".format(pokemon),
+                  description="""
+                  **Abilities:** {0}
+**Base XP:** {1}
+**Order:** {2}
+**Weight:** {3}
+**Height:** {4}
+
+
+
+
+                 """.format(abilities, response["base_experience"], response["order"], response["weight"], response["height"]),
+           )
+           embed.set_thumbnail(url=response["sprites"]["front_default"])
+           await ctx.respond(embed=embed)
+
+    
+
+           
+
    
            
         
