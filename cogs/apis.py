@@ -192,6 +192,7 @@ class Apis(commands.Cog):
                title = "Weather in {0}".format(city.upper()),
         )
         embed.add_field(name="Today", value="Temperature is {0}, wind is up to {1} and it's {2}.".format(response["temperature"], response["wind"], response["description"]))
+        embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
 
         for day in response["forecast"]:
                embed.add_field(name="Day {}".format(day["day"]), value="Temperture is {0} and wind is up to {1}.".format(day["temperature"], day["wind"]))
@@ -211,6 +212,7 @@ class Apis(commands.Cog):
                   color=discord.Colour.blurple(),
            )
            embed.set_image(url="https://http.dog/{0}.jpg".format(status))
+           embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
            await ctx.respond(embed=embed)
 
     @group.command(name="pokedex", description="Get info on a pokemon!")
@@ -243,7 +245,51 @@ class Apis(commands.Cog):
                  """.format(abilities, response["base_experience"], response["order"], response["weight"], response["height"]),
            )
            embed.set_thumbnail(url=response["sprites"]["front_default"])
+           embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
            await ctx.respond(embed=embed)
+
+    @group.command(name="dictionary", description="Get the definition of an english word!")
+    async def dictionary(self, ctx, word: discord.Option(str, description="Word to get definition of")):
+           request = requests.get("https://api.dictionaryapi.dev/api/v2/entries/en/{}".format(word))
+           if request.status_code == 404:
+                  await ctx.respond(":x: Word not found! Perhaps you misspelled it?")
+                  return
+           response = json.loads(request.text)
+           response = response[0]
+           description = ""
+           for definitions in response["meanings"]:
+                  description = description + "_{0} usage:_ {1}\n".format(
+                         definitions["partOfSpeech"],
+                         definitions["definitions"][0]["definition"]
+                  )
+
+           embed = discord.Embed(
+                  title = "Definition of {0}".format(word),
+                  description=description,
+                  color=discord.Colour.blurple(),
+           )
+           embed.set_footer(text="{0} v{1}".format(name, VERSION), icon_url=icon)
+           await ctx.respond(embed=embed)
+
+    @group.command(name="fakeperson", description="Generates a fake person and their info")
+    async def fakeperson(self, ctx):
+           request = requests.get("https://randomuser.me/api/")
+           response = json.loads(request.text)
+           response = response["results"][0]
+           embed = discord.Embed(
+                  title="{0}. {1} {2}, {3}".format(response["name"]["title"], response["name"]["first"], response["name"]["last"], response["gender"])
+           )
+           embed.set_image(url=response["picture"]["large"])
+           embed.add_field(name="Street", value="{0} {1}".format(response["location"]["street"]["number"], response["location"]["street"]["name"]))
+           embed.add_field(name="Location", value="{0}, {1}, {2}".format(response["location"]["city"], response["location"]["state"], response["location"]["country"]))
+           embed.add_field(name="Email", value=response["email"])
+           embed.add_field(name="Age", value="Born on {0}, age {1}".format(response["dob"]["date"], response["dob"]["age"]))
+           embed.add_field(name="Phone Number", value=response["phone"])
+           await ctx.respond(embed=embed)
+           
+                  
+
+           
 
     
 
@@ -269,3 +315,4 @@ class Apis(commands.Cog):
 
 def setup(bot): # this is called by Pycord to setup the cog
     bot.add_cog(Apis(bot)) # add the cog to the bot
+
