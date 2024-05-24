@@ -3,6 +3,7 @@ from discord.ext import commands
 import os
 import time
 import json
+import uuid
 
 with open("version.json", "r") as f:
             _r = json.load(f)
@@ -173,6 +174,20 @@ class utilitycog(commands.Cog):
               self.add_item(supportServerButton)
 
          await ctx.respond(view=ButtonView())
+
+    @group.command(name="uuid", description="Generate a Version 4 UUID")
+    async def uuid(self, ctx, amount: discord.Option(int, description="How many UUIDs to create (max 50)", required=False, default=1)):
+         if amount > 50:
+              await ctx.respond(":x: Too many requests! Must be less than 50.")
+              return
+         uuids = ""
+         for uuidamount in range(amount):
+              uuids = uuids + "`{}`\n".format(uuid.uuid4())
+
+         await ctx.respond(str(uuids))
+              
+         
+         
       
 
 
