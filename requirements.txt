@@ -3,3 +3,4 @@ cowsay
 nltk
 requests
 mcstatus
+uuid
